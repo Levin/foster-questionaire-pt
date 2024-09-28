@@ -13,7 +13,6 @@ config :foster, Foster.Repo,
 # Questionnaire schema
 # Configure your database
 
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

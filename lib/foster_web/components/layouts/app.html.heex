@@ -1,32 +1,33 @@
 <div class="flex flex-col h-screen justify-between">
-<header class="px-4 sm:px-6 lg:px-8">
-  <!-- Add a language toggle component here -->
-  <.live_component module={FosterWeb.Components.NavBar} id="navbar" />
-</header>
-<main class=" py-10 sm:px-6 lg:px-8 mb-auto">
-  <div class="mx-auto max-w-2xl">
-    <.flash_group flash={@flash} />
-    <%= @inner_content %>
-  </div>
-</main>
-<footer class="">
-  <div class="mx-10 mb-4">
-    <p>
-      Research and Data Compilation by <span class="underline font-bold">Local.Foundation</span>
-      An <span class="underline font-bold">ImpactHackers</span> Hackathon in support of <span class="underline font-bold">AIPAR AL</span>
-      Released under x License. <span class="underline font-bold">Privacy Policy</span>. <span class="underline font-bold">Cookies</span>.
-    </p>
-    <div class="flex items-center gap-2 mt-2">
-      <div>
-        <img src="/images/Logo.svg" />
-      </div>
-      <div>
-        <img src="/images/Logo-AIPAR 1.svg" />
-      </div>
-      <div>
-        <img src="/images/impact-hackers 1.svg" />
+  <header class="px-4 sm:px-6 lg:px-8">
+    <!-- Add a language toggle component here -->
+    <.live_component module={FosterWeb.Components.NavBar} id="navbar" />
+  </header>
+  <main class=" py-10 sm:px-6 lg:px-8 mb-auto">
+    <div class="mx-auto max-w-2xl">
+      <.flash_group flash={@flash} />
+      <%= @inner_content %>
+    </div>
+  </main>
+  <footer class="">
+    <div class="mx-10 mb-4">
+      <p>
+        Research and Data Compilation by <span class="underline font-bold">Local.Foundation</span>
+        An <span class="underline font-bold">ImpactHackers</span>
+        Hackathon in support of <span class="underline font-bold">AIPAR AL</span>
+        Released under x License. <span class="underline font-bold">Privacy Policy</span>. <span class="underline font-bold">Cookies</span>.
+      </p>
+      <div class="flex items-center gap-2 mt-2">
+        <div>
+          <img src="/images/Logo.svg" />
+        </div>
+        <div>
+          <img src="/images/Logo-AIPAR 1.svg" />
+        </div>
+        <div>
+          <img src="/images/impact-hackers 1.svg" />
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 </div>

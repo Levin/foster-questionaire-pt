@@ -2,10 +2,9 @@ defmodule FosterWeb.Components.NavBar do
   use FosterWeb, :live_component
 
   def update(params, socket) do
-    {:ok, 
-      socket
-      |> assign(:languages, @languages)
-    }
+    {:ok,
+     socket
+     |> assign(:languages, @languages)}
   end
 
   def handle_event("change_language", _params, socket) do

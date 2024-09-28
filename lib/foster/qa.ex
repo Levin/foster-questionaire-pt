@@ -19,6 +19,7 @@ defmodule Foster.QA do
     case Repo.insert(changeset) do
       {:ok, question} ->
         {:ok, question}
+
       {:error, changeset} ->
         {:error, changeset}
     end

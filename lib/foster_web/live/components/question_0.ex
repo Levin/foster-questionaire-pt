@@ -2,17 +2,14 @@ defmodule FosterWeb.Components.Question0 do
   use FosterWeb, :live_component
 
   def mount(socket) do
-    {:ok, 
-      socket
-    }
+    {:ok, socket}
   end
 
   def handle_event("submit", _params, socket) do
-    {:noreply, 
-      socket
-      |> assign(:slide_0, false)
-      |> assign(:slide_1, true)
-    }
+    {:noreply,
+     socket
+     |> assign(:slide_0, false)
+     |> assign(:slide_1, true)}
   end
 
   def render(assigns) do
@@ -31,11 +28,7 @@ defmodule FosterWeb.Components.Question0 do
         Tens algum conhecimento sobre famílias de acolhimento em Portugal?
       </p>
 
-
-      <.simple_form for={} 
-        phx-change="validate"
-        phx-submit="submit"
-        >
+      <.simple_form for={} phx-change="validate" phx-submit="submit">
         <div class="flex items-center gap-2">
           <.input type="checkbox" name="knowledge_false" value="no-knowledge" class="" />
           <p class="font-nohemt">Não tenho conhecimento.</p>

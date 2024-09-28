@@ -16,7 +16,7 @@ alias Foster.QA.Question
 questions = [
   %{id: 1, body: "What is your name?"},
   %{id: 2, body: "What is your age?"},
-  %{id: 3, body: "What is your level of education?"},
+  %{id: 3, body: "What is your level of education?"}
 ]
 
 Enum.each(questions, fn question ->
