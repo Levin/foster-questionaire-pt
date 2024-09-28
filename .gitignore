@@ -36,5 +36,4 @@ npm-debug.log
 /assets/node_modules/
 
 .history/
-/config/dev.exs
 /rel/
