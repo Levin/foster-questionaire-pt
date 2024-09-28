@@ -2,23 +2,31 @@ defmodule FosterWeb.Components.Question1 do
   use FosterWeb, :live_component
 
   def mount(socket) do
-    {:ok, 
+    {:ok,
       socket
       |> assign(:slide_1, true)
       |> assign(:slide_2, false)
+      |> assign(:people, false)
+      |> assign(:media, false)
+      |> assign(:internet, false)
+      |> assign(:social_media, false)
     }
   end
 
   def update(%{branch: type}, socket) do
-    {:ok, 
+    {:ok,
       socket
       |> assign(:path, type)
     }
   end
 
   def handle_event("validate", params, socket) do
-    {:noreply, 
+    {:noreply,
       socket
+      |> assign(:people, params["people"])
+      |> assign(:media, params["media"])
+      |> assign(:internet, params["internet"])
+      |> assign(:social_media, params["social_media"])
     }
   end
 
@@ -33,11 +41,29 @@ defmodule FosterWeb.Components.Question1 do
   def render(assigns) do
     ~H"""
     <div>
+
       <%= check_path(assigns) %>
     </div>
 
-    """
-  end
+      <.simple_form
+      for={}
+      phx-change="validate"
+      phx-submit="submit"
+      phx-target={@myself}
+      >
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="people" checked={@people == "true"} />
+        <div>
+          <p class="font-nohemt">De pessoas</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="internet" checked={@internet == "true"} />
+        <div>
+          <p class="font-nohemt">Atraves internet</p>
+        </div>
+      </div>
+
 
   defp check_path(assigns) when assigns.path == "0" do
     ~H"""
