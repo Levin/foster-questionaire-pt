@@ -64,3 +64,14 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+
+
+
+#  Username:    postgres 
+#Password:    mAwID5qHkxkLTFP
+#Hostname:    hack-foster-db.internal
+# Flycast:     fdaa:0:52a8:0:1::5
+# Proxy port:  5432
+# Postgres port:  5433
+# Connection string: postgres://postgres:mAwID5qHkxkLTFP@hack-foster-db.flycast:5432
+
