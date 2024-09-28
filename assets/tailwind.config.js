@@ -18,6 +18,8 @@ module.exports = {
       },
       colors: {
         brand: "#FD4F00",
+        light_dark_matter: "#7B849A",
+        enchanted_stardust: "#5454FF"
       }
     },
   },

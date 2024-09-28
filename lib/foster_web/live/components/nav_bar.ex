@@ -1,8 +1,6 @@
 defmodule FosterWeb.Components.NavBar do
   use FosterWeb, :live_component
 
-  @languages ["EN", "PT"]
-
   def update(params, socket) do
     {:ok, 
       socket
@@ -10,21 +8,23 @@ defmodule FosterWeb.Components.NavBar do
     }
   end
 
+  def handle_event("change_language", _params, socket) do
+    {:noreply, socket}
+  end
+
   def render(assigns) do
     ~H"""
     <div class="flex justify-center gap-3 font-nohami pt-6">
       <div>
-        Home
+        <a href="/">Home</a>
       </div>
       <div>
-        Date Insights
+        <a href="/estatisticas">Estatísticas</a>
       </div>
       <div>
-        EN
+        PT
       </div>
     </div>
     """
   end
-
-
 end

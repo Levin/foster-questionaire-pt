@@ -18,6 +18,7 @@ defmodule FosterWeb.Router do
     pipe_through :browser
 
     live "/", InteractiveForm
+    live "/estatisticas", Sites.Insights
   end
 
   # Other scopes may use custom stacks.

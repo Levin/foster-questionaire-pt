@@ -231,7 +231,7 @@ defmodule FosterWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg bg-enchanted_stardust hover:bg-zinc-700 py-2 px-3 flex w-full justify-center",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
         @class
       ]}
@@ -318,7 +318,7 @@ defmodule FosterWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded-xl border-zinc-300 text-zinc-900 focus:ring-0"
+          class="rounded-xl border-enchanted_stardust text-enchanted_stardust focus:ring-0"
           {@rest}
         />
         <%= @label %>
