@@ -41,29 +41,10 @@ defmodule FosterWeb.Components.Question1 do
   def render(assigns) do
     ~H"""
     <div>
-
       <%= check_path(assigns) %>
     </div>
-
-      <.simple_form
-      for={}
-      phx-change="validate"
-      phx-submit="submit"
-      phx-target={@myself}
-      >
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="people" checked={@people == "true"} />
-        <div>
-          <p class="font-nohemt">De pessoas</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="internet" checked={@internet == "true"} />
-        <div>
-          <p class="font-nohemt">Atraves internet</p>
-        </div>
-      </div>
-
+    """
+  end
 
   defp check_path(assigns) when assigns.path == "0" do
     ~H"""
