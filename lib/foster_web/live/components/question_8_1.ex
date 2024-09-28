@@ -5,7 +5,7 @@ defmodule FosterWeb.Components.Question81 do
     {:ok, 
       socket
       |> assign(:slide_61, true)
-      |> assign(:slide_101, false)
+      |> assign(:slide_81, false)
     }
   end
 
@@ -13,6 +13,7 @@ defmodule FosterWeb.Components.Question81 do
     IO.inspect(params)
     {:ok, 
       socket
+      |> assign(:path, params["path"])
     }
   end
 
@@ -26,13 +27,13 @@ defmodule FosterWeb.Components.Question81 do
     {:noreply,
       socket
       |> assign(:slide_61, false)
-      |> assign(:slide_101, true)
+      |> assign(:slide_81, true)
     }
   end
 
   def render(assigns) do
     ~H"""
-    <div class="mx-10">
+    <div >
       <%= if @slide_61 do %>
       <p class="text-2xl">
        Agradecimento & Call to Action (incl. informações institucionais)
@@ -44,24 +45,22 @@ defmodule FosterWeb.Components.Question81 do
       phx-submit="submit"
       phx-target={@myself}
       >
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Não tenho conhecimento.</p>
-      </div>
-      <div class="flex items-center gap-2">
-      <div>
-      <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
-      </div>
-      </div>
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Tenho.</p>
-      </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="0" />
+        <p class="font-nohemt">Yes</p>
+        </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="1" />
+        <p class="font-nohemt">No</p>
+        </div>
+ 
       <.button>Submeter</.button>
       </.simple_form>
 
         <% end %>
 
-      <%= if @slide_101 do %>
-        <.live_component module={FosterWeb.Components.End} id="end" type={@type}/>
+      <%= if @slide_81 do %>
+        <.live_component module={FosterWeb.Components.End} id="end" type={@path}/>
         <% end %>
     </div>
     """

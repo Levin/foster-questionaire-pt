@@ -12,7 +12,7 @@ defmodule FosterWeb.Components.Question1 do
   def update(%{branch: type}, socket) do
     {:ok, 
       socket
-      |> assign(:type, type)
+      |> assign(:path, type)
     }
   end
 
@@ -33,25 +33,25 @@ defmodule FosterWeb.Components.Question1 do
   def render(assigns) do
     ~H"""
     <div>
-      <%= check_path(assigns, @type) %>
+      <%= check_path(assigns) %>
     </div>
 
     """
   end
 
-  defp check_path(assigns, :knowledge) do
+  defp check_path(assigns) when assigns.path == "0" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question2} id="question_2" type={@type}/>
+    <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path}/>
     """
   end
-  defp check_path(assigns, :no_knowledge) do
+  defp check_path(assigns) when assigns.path == "1" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question51} id="question_5" type={@type}/>
+    <.live_component module={FosterWeb.Components.Question3} id="question_3" path={@path}/>
     """
   end
-  defp check_path(assigns, :interested) do
+  defp check_path(assigns) when assigns.path == "2" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question3} id="question_3" type={@type}/>
+    <.live_component module={FosterWeb.Components.Question51} id="question_5" path={@path}/>
     """
   end
 end
