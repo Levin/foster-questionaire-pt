@@ -38,17 +38,13 @@ defmodule FosterWeb.InteractiveForm do
     {:noreply,
      socket
      |> assign(:slide_0, false)
-     |> assign(:slide_1, true)}
+     |> assign(:slide_1, true)
+    }
   end
 
   def render(assigns) do
     ~H"""
-    <%= if @slide_0 do %>
-      <.live_component module={FosterWeb.Components.Question0} id="base_slide" />
-    <% end %>
-    <%= if @slide_1 do %>
-      <.live_component module={FosterWeb.Components.Question1} id="question_1" />
-    <% end %>
+    <.live_component module={FosterWeb.Components.Question0} id="base_slide" />
     """
   end
 end
