@@ -318,7 +318,7 @@ defmodule FosterWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded border-zinc-300 text-zinc-900 focus:ring-0"
+          class="rounded-xl border-zinc-300 text-zinc-900 focus:ring-0"
           {@rest}
         />
         <%= @label %>

@@ -13,6 +13,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+       fontFamily: {
+        nohemi: ['Nohemi']
+      },
       colors: {
         brand: "#FD4F00",
       }
