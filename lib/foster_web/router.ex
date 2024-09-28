@@ -17,7 +17,7 @@ defmodule FosterWeb.Router do
   scope "/", FosterWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", InteractiveForm
   end
 
   # Other scopes may use custom stacks.
