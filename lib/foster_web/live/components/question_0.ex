@@ -15,11 +15,10 @@ defmodule FosterWeb.Components.Question0 do
 
 
   def handle_event("validate", params, socket) do
+    IO.inspect(params)
     {:noreply, 
       socket
-      |> assign(:no_knowledge, params["no_knowledge"])
-      |> assign(:knowledge, params["knowledge"])
-      |> assign(:interested, params["interested"])
+      |> assign(:path, params["path"])
     }
   end
 
@@ -57,17 +56,17 @@ defmodule FosterWeb.Components.Question0 do
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-      <.input type="checkbox" name="no_knowledge" checked={@no_knowledge == "true"} />
+      <input type="radio" name="path" value="0" >
       <p class="font-nohemt">Não tenho conhecimento.</p>
       </div>
       <div class="flex items-center gap-2">
-      <.input type="checkbox" name="interested" checked={@interested == "true"} />
+      <input type="radio" name="path" value="1" >
       <div>
       <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
       </div>
       </div>
       <div class="flex items-center gap-2">
-      <.input type="checkbox" name="knowledge" checked={@knowledge == "true"} />
+      <input type="radio" name="path" value="2">
       <p class="font-nohemt">Tenho.</p>
       </div>
       <.button>Submeter</.button>
@@ -77,14 +76,9 @@ defmodule FosterWeb.Components.Question0 do
     </div>
       <% end %>
       <%= if @slide_1 do %>
-        <.live_component module={FosterWeb.Components.Question1} id="question_1" branch={get_branch(assigns)} />
+        <.live_component module={FosterWeb.Components.Question1} id="question_1" branch={@path} />
         <% end %>
     </div>
     """
   end
-
-
-  defp get_branch(%{knowledge: "true"} = _params), do: :knowledge
-  defp get_branch(%{no_knowledge: "true"} = _params), do: :no_knowledge
-  defp get_branch(%{interested: "true"} = _params), do: :interested
 end

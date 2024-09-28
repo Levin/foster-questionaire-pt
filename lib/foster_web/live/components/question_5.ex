@@ -13,12 +13,14 @@ defmodule FosterWeb.Components.Question5 do
     IO.inspect(params)
     {:ok, 
       socket
+      |> assign(:path, params["path"])
     }
   end
 
   def handle_event("validate", params, socket) do
     {:noreply, 
       socket
+      |> assign(:path, params["path"])
     }
   end
 
@@ -44,29 +46,37 @@ defmodule FosterWeb.Components.Question5 do
       phx-submit="submit"
       phx-target={@myself}
       >
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Não tenho conhecimento.</p>
-      </div>
-      <div class="flex items-center gap-2">
-      <div>
-      <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
-      </div>
-      </div>
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Tenho.</p>
-      </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="0" />
+        <p class="font-nohemt">Yes</p>
+        </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="1" />
+        <p class="font-nohemt">No</p>
+        </div>
+ 
       <.button>Submeter</.button>
       </.simple_form>
-
-
         <% end %>
 
       <%= if @slide_6 do %>
+        <%= check_path(assigns) %>
         <.live_component module={FosterWeb.Components.Question6} id="question_6" type={@type}/>
         <% end %>
-
     </div>
-
     """
+  end
+
+  defp check_path(assigns) do
+
+    if assigns["path"] do
+      ~H"""
+      <.live_component module={FosterWeb.Components.Question6} id="question_6" type={@type}/>
+      """
+    else
+      ~H"""
+      <.live_component module={FosterWeb.Components.Question51} id="question_51" type={@type}/>
+      """
+    end
   end
 end

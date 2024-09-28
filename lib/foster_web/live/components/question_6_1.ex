@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question71 do
+defmodule FosterWeb.Components.Question61 do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -13,6 +13,7 @@ defmodule FosterWeb.Components.Question71 do
     IO.inspect(params)
     {:ok, 
       socket
+      |> assign(:path, params["path"])
     }
   end
 
@@ -32,7 +33,7 @@ defmodule FosterWeb.Components.Question71 do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-10">
+    <div>
       <%= if @slide_6 do %>
         <p class="text-2xl">
         Breves dados demográficos 
@@ -44,22 +45,24 @@ defmodule FosterWeb.Components.Question71 do
       phx-submit="submit"
       phx-target={@myself}
       >
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Não tenho conhecimento.</p>
-      </div>
-      <div class="flex items-center gap-2">
-      <div>
-      <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
-      </div>
-      </div>
-      <div class="flex items-center gap-2">
-      <p class="font-nohemt">Tenho.</p>
-      </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="0" />
+        <p class="font-nohemt">Yes</p>
+        </div>
+        <div class="flex items-center gap-2">
+        <input type="radio" name="motivos" value="1" />
+        <p class="font-nohemt">No</p>
+        </div>
       <.button>Submeter</.button>
       </.simple_form>
 
 
         <% end %>
+
+      <%= if @slide_7 do %>
+        <.live_component module={FosterWeb.Components.Question81} id="question_81" path={@path}/>
+        <% end %>
+
     </div>
     """
   end

@@ -17,7 +17,7 @@ defmodule FosterWeb.Components.Question2 do
     IO.inspect(params)
     {:ok,
       socket
-      |> assign(:type, "")
+      |> assign(:path, params["type"])
     }
   end
 

@@ -16,7 +16,7 @@ defmodule FosterWeb.Components.Question1 do
   def update(%{branch: type}, socket) do
     {:ok,
       socket
-      |> assign(:type, type)
+      |> assign(:path, type)
     }
   end
 
@@ -41,14 +41,9 @@ defmodule FosterWeb.Components.Question1 do
   def render(assigns) do
     ~H"""
     <div>
-    <%= if @slide_1 do %>
-    <div class="mx-10">
-      <div class="mb-4">
-        <img src="/images/somekids.svg" />
-      </div>
-      <p class="text-2xl text-light_dark_matter font-inter">
-        Onde ouviu falar de Acolhimento Familiar?
-      </p>
+
+      <%= check_path(assigns) %>
+    </div>
 
       <.simple_form
       for={}
@@ -69,27 +64,20 @@ defmodule FosterWeb.Components.Question1 do
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="media" checked={@media == "true"} />
-        <div>
-          <p class="font-nohemt">Atraves media</p>
-        </div>
-      </div>
 
-
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
-        <p class="font-nohemt">Atraves media socias</p>
-      </div>
-      <.button>Submeter</.button>
-      </.simple_form>
-
-    </div>
-    <% end %>
-      <%= if @slide_2 do %>
-        <.live_component module={FosterWeb.Components.Question2} id="question_2" branch={assigns.type} />
-      <% end %>
-    </div>
+  defp check_path(assigns) when assigns.path == "0" do
+    ~H"""
+    <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path}/>
+    """
+  end
+  defp check_path(assigns) when assigns.path == "1" do
+    ~H"""
+    <.live_component module={FosterWeb.Components.Question3} id="question_3" path={@path}/>
+    """
+  end
+  defp check_path(assigns) when assigns.path == "2" do
+    ~H"""
+    <.live_component module={FosterWeb.Components.Question51} id="question_5" path={@path}/>
     """
   end
 end
