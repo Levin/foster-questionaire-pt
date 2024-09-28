@@ -6,7 +6,6 @@ defmodule FosterWeb.InteractiveForm do
       socket
       |> assign(:slide_0, true)
       |> assign(:slide_1, false)
-      |> assign(:selected, nil)
     }
   end
 
@@ -23,7 +22,7 @@ defmodule FosterWeb.InteractiveForm do
     end
   end
 
-  def handle_event("submit", _params, socket) when socket.assigns.selected do
+  def handle_event("submit", _params, socket) do
     {:noreply, 
       socket
       |> assign(:slide_0, false)
@@ -31,51 +30,14 @@ defmodule FosterWeb.InteractiveForm do
     }
   end
 
-  def handle_event("submit", _params, socket) do
-    {:noreply, socket }
-  end
 
   def render(assigns) do
     ~H"""
     <%= if @slide_0 do %>
-    <div class="mx-10">
-      <div class="mb-4">
-        <img src="/images/somekids.svg" />
-      </div>
-      <p class="text-2xl">
-        <span class="font-bold font-nohemi ">
-        Já ouviu falar sobre famílias de acolhimento?
-        </span>
-        Ajude-nos a criar uma maior consciêncialização para famílias de acolhimento e explore diferentes estatísticas.
-      </p>
-      <p class="text-2xl text-light_dark_matter font-inter">
-        Tens algum conhecimento sobre famílias de acolhimento em Portugal?
-      </p>
-
-
-      <.simple_form for={} 
-        phx-change="validate"
-        phx-submit="submit"
-        >
-        <div class="flex items-center gap-2">
-          <.input type="checkbox" name="knowledge_false" value="no-knowledge" class="" />
-          <p class="font-nohemt">Não tenho conhecimento.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <.input type="checkbox" name="knowledge_interested" value="no-knowledge-learn" />
-          <div>
-            <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <.input type="checkbox" name="knowledge" value="some-knowledge" />
-          <p class="font-nohemt">Tenho.</p>
-        </div>
-        <.button>Submeter</.button>
-      </.simple_form>
-    </div>
+      <.live_component module={FosterWeb.Components.Question0} id="base_slide" /> 
       <% end %>
     <%= if @slide_1 do %>
+      <.live_component module={FosterWeb.Components.Question1} id="question_1" /> 
       <% end %>
     """
   end

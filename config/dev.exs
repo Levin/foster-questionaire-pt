@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :foster, Foster.Repo,
-  username: "postgres",
+  username: "levin",
   password: "postgres",
   hostname: "localhost",
   database: "foster_dev",
