@@ -2,7 +2,7 @@ defmodule FosterWeb.Components.Question4 do
   use FosterWeb, :live_component
 
   def mount(socket) do
-    {:ok, 
+    {:ok,
       socket
       |> assign(:slide_4, true)
       |> assign(:slide_5, false)
@@ -11,13 +11,13 @@ defmodule FosterWeb.Components.Question4 do
 
   def update(params, socket) do
     IO.inspect(params)
-    {:ok, 
+    {:ok,
       socket
     }
   end
 
   def handle_event("validate", params, socket) do
-    {:noreply, 
+    {:noreply,
       socket
     }
   end
@@ -35,12 +35,12 @@ defmodule FosterWeb.Components.Question4 do
     <div class="mx-10">
       <%= if @slide_4 do %>
       <p class="text-2xl">
-          Breves dados demograficos
+           Quais sao os principais motivos?
       </p>
 
-      <.simple_form 
-      for={} 
-      phx-change="validate" 
+      <.simple_form
+      for={}
+      phx-change="validate"
       phx-submit="submit"
       phx-target={@myself}
       >

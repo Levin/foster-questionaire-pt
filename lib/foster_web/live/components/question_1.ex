@@ -6,10 +6,10 @@ defmodule FosterWeb.Components.Question1 do
       socket
       |> assign(:slide_1, true)
       |> assign(:slide_2, false)
-      |> assign(:people, false)
-      |> assign(:media, false)
-      |> assign(:internet, false)
-      |> assign(:social_media, false)
+      # |> assign(:people, false)
+      # |> assign(:media, false)
+      # |> assign(:internet, false)
+      # |> assign(:social_media, false)
     }
   end
 
@@ -23,10 +23,10 @@ defmodule FosterWeb.Components.Question1 do
   def handle_event("validate", params, socket) do
     {:noreply,
       socket
-      |> assign(:people, params["people"])
-      |> assign(:media, params["media"])
-      |> assign(:internet, params["internet"])
-      |> assign(:social_media, params["social_media"])
+      # |> assign(:people, params["people"])
+      # |> assign(:media, params["media"])
+      # |> assign(:internet, params["internet"])
+      # |> assign(:social_media, params["social_media"])
     }
   end
 
@@ -48,17 +48,17 @@ defmodule FosterWeb.Components.Question1 do
 
   defp check_path(assigns) when assigns.path == "0" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path}/>
+    <.live_component module={FosterWeb.Components.Question51} id="question_5" path={@path}/>
     """
   end
   defp check_path(assigns) when assigns.path == "1" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question3} id="question_3" path={@path}/>
+    <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path}/>
     """
   end
   defp check_path(assigns) when assigns.path == "2" do
     ~H"""
-    <.live_component module={FosterWeb.Components.Question51} id="question_5" path={@path}/>
+    <.live_component module={FosterWeb.Components.Question11} id="question_1_1" path={@path}/>
     """
   end
 end

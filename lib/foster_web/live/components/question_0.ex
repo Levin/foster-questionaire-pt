@@ -2,7 +2,7 @@ defmodule FosterWeb.Components.Question0 do
   use FosterWeb, :live_component
 
   def mount(socket) do
-    {:ok, 
+    {:ok,
       socket
       |> assign(:slide_0, true)
       |> assign(:slide_1, false)
@@ -16,7 +16,7 @@ defmodule FosterWeb.Components.Question0 do
 
   def handle_event("validate", params, socket) do
     IO.inspect(params)
-    {:noreply, 
+    {:noreply,
       socket
       |> assign(:path, params["path"])
     }
@@ -49,26 +49,27 @@ defmodule FosterWeb.Components.Question0 do
         Tens algum conhecimento sobre famílias de acolhimento em Portugal?
       </p>
 
-      <.simple_form 
-      for={} 
-      phx-change="validate" 
+      <.simple_form
+      for={}
+      phx-change="validate"
       phx-submit="submit"
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-      <input type="radio" name="path" value="0" >
-      <p class="font-nohemt">Não tenho conhecimento.</p>
+        <input type="radio" name="path" value="0" >
+        <p class="font-nohemt">Não tenho conhecimento.</p>
       </div>
+
       <div class="flex items-center gap-2">
-      <input type="radio" name="path" value="1" >
-      <div>
-      <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
+        <input type="radio" name="path" value="1" >
+        <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
       </div>
-      </div>
+
       <div class="flex items-center gap-2">
-      <input type="radio" name="path" value="2">
-      <p class="font-nohemt">Tenho.</p>
+        <input type="radio" name="path" value="2">
+        <p class="font-nohemt">Tenho.</p>
       </div>
+
       <.button>Submeter</.button>
       </.simple_form>
 
