@@ -7,7 +7,8 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
     heard_about = 
       Foster.Answers.all_answers()
       |> Enum.group_by(& &1.body["heard_about_fostering"])
-      |> Enum.map(fn {groupname, answers} -> 
+      |> Enum.map(fn
+        {groupname, answers} -> 
         for name <- groupname do
           [name, length(answers)]  
         end
@@ -15,7 +16,6 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
       |> List.flatten()
       |> Enum.chunk_every(2)
 
-    IO.inspect(heard_about)
 
     dataset =
       Dataset.new(heard_about)

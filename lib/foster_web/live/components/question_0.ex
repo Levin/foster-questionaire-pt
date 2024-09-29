@@ -49,6 +49,9 @@ defmodule FosterWeb.Components.Question0 do
         </span>
         Descubra a importância do Acolhimento Familiar para Crianças e Jovens e como poderá ter impacto.
         </p>
+        <span class="font-bold font-nohemi ">
+        A participação é anónima. Demora apenas 5 minutos
+        </span>
         <p class="text-2xl text-light_dark_matter font-inter">
         Já ouviu falar de Acolhimento Familiar?
         </p>

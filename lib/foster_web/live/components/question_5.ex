@@ -23,10 +23,15 @@ defmodule FosterWeb.Components.Question5 do
   def handle_event("submit", params, socket) do
 
     # NOTE: do edit the params[....]
+    filtered_answers = 
+      params
+      |> Enum.filter(fn {_, value} -> value == "true" end)
+      |> Enum.map(fn {key, _} -> key end)
+
     updated_answers = Map.put(
       socket.assigns.answers,
       :motive_against_fostering,
-      [params["money"], params["conditions"], params["fear1"], params["fear2"]]
+      filtered_answers
     )
 
     {:noreply,
@@ -63,21 +68,21 @@ defmodule FosterWeb.Components.Question5 do
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="conditions" checked={@conditions == "true"} />
+        <.input type="checkbox" name="Living Conditions" checked={@conditions == "true"} />
         <div>
           <p class="font-nohemt">Home conditions</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="fear1" checked={@fear1 == "true"} />
+        <.input type="checkbox" name="Fear of Attachment/Loss" checked={@fear1 == "true"} />
         <div>
           <p class="font-nohemt">Fear of attachment + loss</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="fear2" checked={@fear2 == "true"} />
+        <.input type="checkbox" name="Fear of a difficult child" checked={@fear2 == "true"} />
         <div>
           <p class="font-nohemt">Fear a "difficult" child</p>
         </div>

@@ -62,7 +62,7 @@ defmodule FosterWeb.Components.Question2 do
             </div>
             <div class="flex items-center gap-2">
               <.label>Your Gender</.label>
-              <.input name="sex" value="" placeholder="Sex" type="select" options={["feminino", "maskulino"]} />
+              <.input name="sex" value="" placeholder="Sex" type="select" options={["Non-Binary", "I prefeer not to say","feminino", "maskulino"]} />
             </div>
             <div class="flex items-center gap-2">
               <.label>Region in Portugal</.label>

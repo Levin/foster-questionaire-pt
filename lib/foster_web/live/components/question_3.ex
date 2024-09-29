@@ -52,7 +52,7 @@ defmodule FosterWeb.Components.Question3 do
         <img src="/images/somekids.svg" />
       </div>
       <p class="text-2xl text-light_dark_matter font-inter">
-        De 1 (menos provável) a 5 (mais provável), Consideraria ser uma Família de Acolhimento?
+      Qual é a probabilidade de vir a ser uma Família de Acolhimento?
       </p>
 
       <.simple_form
@@ -63,27 +63,27 @@ defmodule FosterWeb.Components.Question3 do
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_3" value="1" >
-        <p class="font-nohemt">1</p>
+        <p class="font-nohemt">1 - Improvável</p>
       </div>
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_3" value="2" >
-        <p class="font-nohemt">2</p>
+        <p class="font-nohemt">2 - Pouco provável</p>
       </div>
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_3" value="3" >
-        <p class="font-nohemt">3</p>
+        <p class="font-nohemt">3 - Eventualmente</p>
       </div>
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_3" value="4" >
-        <p class="font-nohemt">4</p>
+        <p class="font-nohemt">4 - Algo provável</p>
       </div>
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_3" value="5" >
-        <p class="font-nohemt">5</p>
+        <p class="font-nohemt">5 - Muito provável</p>
       </div>
 
       <.button>Submeter</.button>
