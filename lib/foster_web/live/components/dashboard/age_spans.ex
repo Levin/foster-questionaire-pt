@@ -4,10 +4,10 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
   alias Contex.Dataset
 
   def mount(socket) do
-    spans = 
+    spans =
       Foster.Answers.all_answers()
       |> Enum.group_by(fn answer -> answer.body["agespan"] end)
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
     IO.inspect(spans)
 
@@ -21,15 +21,13 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
       title: "Age-spans of all the participants"
     ]
 
-    plot = 
+    plot =
       Contex.Plot.new(dataset, Contex.PieChart, 600, 400, opts)
 
-    {:ok, 
-      socket
-      |> assign(:age_spans, spans)
-      |> assign(:plot, plot)
-
-    }
+    {:ok,
+     socket
+     |> assign(:age_spans, spans)
+     |> assign(:plot, plot)}
   end
 
   def render(assigns) do
@@ -39,5 +37,4 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
     </div>
     """
   end
-
 end

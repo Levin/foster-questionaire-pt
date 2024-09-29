@@ -4,10 +4,10 @@ defmodule FosterWeb.Components.Dashboard.Gender do
   alias Contex.Dataset
 
   def mount(socket) do
-    genders = 
+    genders =
       Foster.Answers.all_answers()
       |> Enum.group_by(fn answer -> answer.body["gender"] end)
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
     IO.inspect(genders)
 
@@ -21,14 +21,12 @@ defmodule FosterWeb.Components.Dashboard.Gender do
       title: "Age-spans of all the participants"
     ]
 
-    plot = 
+    plot =
       Contex.Plot.new(dataset, Contex.PieChart, 600, 400, opts)
 
-    {:ok, 
-      socket
-      |> assign(:plot, plot)
-
-    }
+    {:ok,
+     socket
+     |> assign(:plot, plot)}
   end
 
   def render(assigns) do
@@ -38,5 +36,4 @@ defmodule FosterWeb.Components.Dashboard.Gender do
     </div>
     """
   end
-
 end

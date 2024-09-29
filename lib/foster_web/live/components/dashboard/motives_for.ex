@@ -4,10 +4,10 @@ defmodule FosterWeb.Components.Dashboard.MotivesFor do
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    motives_for = 
+    motives_for =
       Foster.Answers.all_answers()
       |> Enum.group_by(& &1.body["motive_for_fostering"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
     dataset = Dataset.new(motives_for)
 
@@ -15,10 +15,9 @@ defmodule FosterWeb.Components.Dashboard.MotivesFor do
 
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
-    {:ok, 
-      socket
-      |> assign(:plot, plot)
-    }
+    {:ok,
+     socket
+     |> assign(:plot, plot)}
   end
 
   def render(assigns) do
@@ -28,5 +27,4 @@ defmodule FosterWeb.Components.Dashboard.MotivesFor do
     </div>
     """
   end
-
 end
