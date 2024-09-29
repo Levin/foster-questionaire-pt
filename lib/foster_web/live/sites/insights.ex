@@ -26,7 +26,9 @@ defmodule FosterWeb.Sites.Insights do
       </div>
 
       <.live_component module={FosterWeb.Components.Dashboard.AgeSpans} id="age_spans" />
+      <.live_component module={FosterWeb.Components.Dashboard.Regions} id="gender" />
       <.live_component module={FosterWeb.Components.Dashboard.Gender} id="gender" />
+      <.live_component module={FosterWeb.Components.Dashboard.HeardAbout} id="gender" />
     </div>
     """
   

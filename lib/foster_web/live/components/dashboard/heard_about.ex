@@ -4,13 +4,21 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    regions = 
+    heard_about = 
       Foster.Answers.all_answers()
       |> Enum.group_by(& &1.body["heard_about_fostering"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn {groupname, answers} -> 
+        for name <- groupname do
+          [name, length(answers)]  
+        end
+      end)
+      |> List.flatten()
+      |> Enum.chunk_every(2)
+
+    IO.inspect(heard_about)
 
     dataset =
-      Dataset.new(regions)
+      Dataset.new(heard_about)
 
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
