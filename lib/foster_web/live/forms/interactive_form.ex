@@ -38,8 +38,7 @@ defmodule FosterWeb.InteractiveForm do
     {:noreply,
      socket
      |> assign(:slide_0, false)
-     |> assign(:slide_1, true)
-    }
+     |> assign(:slide_1, true)}
   end
 
   def render(assigns) do

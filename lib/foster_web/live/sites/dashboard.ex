@@ -6,5 +6,4 @@ defmodule FosterWeb.Sites.Dashboard do
     <div>dashboard</div>
     """
   end
-
 end
