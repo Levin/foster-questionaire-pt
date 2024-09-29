@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question1 do
+defmodule FosterWeb.Components.Question1a do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -8,14 +8,14 @@ defmodule FosterWeb.Components.Question1 do
      |> assign(:slide_2, false)}
   end
 
-  def update(%{branch: type, answers: answers} = params, socket) do
+  def update(%{branch: type, answers: answers} = _params, socket) do
     {:ok,
      socket
      |> assign(:path, type)
      |> assign(:answers, answers)}
   end
 
-  def handle_event("validate", params, socket) do
+  def handle_event("validate", _params, socket) do
     {:noreply, socket}
   end
 
@@ -36,34 +36,13 @@ defmodule FosterWeb.Components.Question1 do
 
   defp check_path(assigns) when assigns.path == "0" do
     ~H"""
-    <.live_component
-      module={FosterWeb.Components.Question51}
-      id="question_5"
-      path={@path}
-      answers={@answers}
-    />
+    <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path} answers={@answers}/>
     """
   end
 
   defp check_path(assigns) when assigns.path == "1" do
     ~H"""
-    <.live_component
-      module={FosterWeb.Components.Question2}
-      id="question_2"
-      path={@path}
-      answers={@answers}
-    />
-    """
-  end
-
-  defp check_path(assigns) when assigns.path == "2" do
-    ~H"""
-    <.live_component
-      module={FosterWeb.Components.Question11}
-      id="question_1_1"
-      path={@path}
-      answers={@answers}
-    />
+    <.live_component module={FosterWeb.Components.Question1b} id="question_1_b" path={@path} answers={@answers}/>
     """
   end
 end

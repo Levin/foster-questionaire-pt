@@ -3,13 +3,13 @@ defmodule FosterWeb.Components.Question0 do
 
   def mount(socket) do
     {:ok,
-     socket
-     |> assign(:slide_0, true)
-     |> assign(:slide_1, false)
-     |> assign(:is_true, false)
-     |> assign(:no_knowledge, false)
-     |> assign(:knowledge, false)
-     |> assign(:interested, false)}
+      socket
+      |> assign(:slide_0, true)
+      |> assign(:slide_1, false)
+      |> assign(:is_true, false)
+      |> assign(:no_knowledge, false)
+      |> assign(:knowledge, false)
+    }
   end
 
   def update(params, socket) do
@@ -46,34 +46,28 @@ defmodule FosterWeb.Components.Question0 do
             Tens algum conhecimento sobre famílias de acolhimento em Portugal?
           </p>
 
-          <.simple_form for={} phx-submit="submit" phx-target={@myself}>
-            <div class="flex items-center gap-2">
-              <input type="radio" name="question_0" value="0" />
-              <p class="font-nohemt">Não tenho conhecimento.</p>
-            </div>
+      <.simple_form
+      for={}
+      phx-submit="submit"
+      phx-target={@myself}
+      >
+      <div class="flex items-center gap-2">
+        <input type="radio" name="question_0" value="0" >
+        <p class="font-nohemt">Não tenho.</p>
+      </div>
 
-            <div class="flex items-center gap-2">
-              <input type="radio" name="question_0" value="1" />
-              <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <input type="radio" name="question_0" value="2" />
-              <p class="font-nohemt">Tenho.</p>
-            </div>
+      <div class="flex items-center gap-2">
+        <input type="radio" name="question_0" value="1">
+        <p class="font-nohemt">Sim, tenho.</p>
+      </div>
 
             <.button>Submeter</.button>
           </.simple_form>
         </div>
       <% end %>
       <%= if @slide_1 do %>
-        <.live_component
-          module={FosterWeb.Components.Question1}
-          id="question_1"
-          branch={@path}
-          answers={@answers}
-        />
-      <% end %>
+        <.live_component module={FosterWeb.Components.Question1a} id="question_1_a" branch={@path} answers={@answers} />
+        <% end %>
     </div>
     """
   end
