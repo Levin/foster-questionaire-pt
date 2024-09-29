@@ -49,7 +49,7 @@ defmodule FosterWeb.Components.Question6 do
       <% end %>
 
       <%= if @slide_7 do %>
-        <.live_component module={FosterWeb.Components.Question7} id="question_7" type={@type} />
+        <.live_component module={FosterWeb.Components.Question7} id="question_7" type={@type} answers={@answers} />
       <% end %>
     </div>
     """

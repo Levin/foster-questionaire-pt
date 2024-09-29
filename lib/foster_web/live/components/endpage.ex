@@ -10,6 +10,14 @@ defmodule FosterWeb.Components.Endpage do
     }
   end
 
+  def update(params, socket) do
+    Foster.Answers.create_answer(%{body: params.answers})
+
+    {:ok, 
+      socket
+      |> assign(:answers, params.answers)
+    }
+  end
 
   def render(assigns) do
     ~H"""

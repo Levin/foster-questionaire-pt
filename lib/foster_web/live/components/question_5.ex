@@ -13,14 +13,22 @@ defmodule FosterWeb.Components.Question5 do
     }
   end
 
-
   def update(params, socket) do
-    IO.inspect(params)
-    {:ok, socket}
+    {:ok, 
+      socket
+      |> assign(:answers, params.answers)
+    }
   end
 
   def handle_event("submit", params, socket) do
-    updated_answers = Map.put(%{}, :question_5, params["question_5"])
+
+    # NOTE: do edit the params[....]
+    updated_answers = Map.put(
+      socket.assigns.answers,
+      :motive_against_fostering,
+      [params["money"], params["conditions"], params["fear1"], params["fear2"]]
+    )
+
     {:noreply,
       socket
       |> assign(:path, params["question_5"])

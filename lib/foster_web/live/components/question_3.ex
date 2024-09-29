@@ -16,19 +16,28 @@ defmodule FosterWeb.Components.Question3 do
   end
 
   def update(params, socket) do
-    IO.inspect(params)
     {:ok,
       socket
+      |> assign(:answers, params.answers)
     }
   end
 
   def handle_event("submit", params, socket) do
-    updated_answers = Map.put(%{}, :question_3, params["question_3"])
+
+    IO.inspect(params)
+    IO.inspect(socket)
+
+    updated_answers = 
+      Map.put(
+        socket.assigns.answers,
+        :becoming_foster,
+        params["question_3"]
+      )
 
     {:noreply,
       socket
-      |> assign(:path, params["question_3"])
       |> assign(:answers, updated_answers)
+      |> assign(:path, params["question_3"])
       |> assign(:slide_3, false)
       |> assign(:slide_4, true)
     }
@@ -83,7 +92,7 @@ defmodule FosterWeb.Components.Question3 do
       </div>
       <% end %>
       <%= if @slide_4 do %>
-        <.live_component module={FosterWeb.Components.Question4} id="question_4" branch={@path} answers={@answers} />
+        <.live_component module={FosterWeb.Components.Question4} id="question_4" path={@path} answers={@answers} />
       <% end %>
     </div>
     """

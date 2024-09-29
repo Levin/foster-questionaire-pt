@@ -6,8 +6,8 @@ defmodule FosterWeb.Components.Dashboard.MotivesFor do
   def mount(socket) do
     motives_for = 
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["motive_for_fostering"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn answer -> answer.body["motives_for_forstering"] end)
+      |> List.flatten
 
     dataset = Dataset.new(motives_for)
 

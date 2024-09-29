@@ -8,11 +8,12 @@ defmodule FosterWeb.Components.Question1a do
      |> assign(:slide_2, false)}
   end
 
-  def update(%{branch: type, answers: answers} = _params, socket) do
+  def update(%{path: path, answers: answers} = params, socket) do
     {:ok,
      socket
-     |> assign(:path, type)
-     |> assign(:answers, answers)}
+     |> assign(:path, path)
+     |> assign(:answers, answers)
+    }
   end
 
   def handle_event("validate", _params, socket) do
@@ -22,8 +23,10 @@ defmodule FosterWeb.Components.Question1a do
   def handle_event("submit", _params, socket) do
     {:noreply,
      socket
-     |> assign(:slide_1, false)
-     |> assign(:slide_2, true)}
+      |> assign(:answers, socket.assigns.answers)
+      |> assign(:path, socket.assigns.path)
+      |> assign(:slide_1, false)
+      |> assign(:slide_2, true)}
   end
 
   def render(assigns) do

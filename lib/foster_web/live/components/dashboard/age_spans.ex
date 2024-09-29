@@ -8,6 +8,9 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
       Foster.Answers.all_answers()
       |> Enum.group_by(fn answer -> answer.body["agespan"] end)
       |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.reject(fn [key, val] -> key == nil end)
+
+
 
     IO.inspect(spans)
 

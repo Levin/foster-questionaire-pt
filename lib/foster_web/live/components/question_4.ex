@@ -13,13 +13,27 @@ defmodule FosterWeb.Components.Question4 do
   end
 
   def update(params, socket) do
-    IO.inspect(params)
-    {:ok, socket}
+    {:ok, 
+      socket
+      |> assign(:answers, params.answers)
+    }
   end
 
 
   def handle_event("submit", params, socket) do
-    updated_answers = Map.put(%{}, :question_4, params["question_4"])
+    filtered_answers = 
+      params
+      |> Enum.filter(fn {_, value} -> value == "true" end)
+      |> Enum.map(fn {key, _} -> key end)
+
+    IO.inspect(filtered_answers)
+
+    updated_answers = Map.put(
+      socket.assigns.answers, 
+      :motive_for_fostering, 
+      filtered_answers
+    )
+
     {:noreply,
       socket
       |> assign(:path, params["question_4"])
@@ -77,7 +91,7 @@ defmodule FosterWeb.Components.Question4 do
     </div>
     <% end %>
       <%= if @slide_5 do %>
-        <.live_component module={FosterWeb.Components.Question5} id="question_5" branch={@path} answers={@answers} />
+        <.live_component module={FosterWeb.Components.Question5} id="question_5" path={@path} answers={@answers} />
       <% end %>
     </div>
     """

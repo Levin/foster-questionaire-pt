@@ -10,7 +10,10 @@ defmodule FosterWeb.Components.Question7 do
 
   def update(params, socket) do
     IO.inspect(params)
-    {:ok, socket}
+    {:ok, 
+      socket
+      |> assign(:answers, params.answers)
+    }
   end
 
   def handle_event("validate", params, socket) do

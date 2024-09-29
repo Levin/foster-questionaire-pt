@@ -10,39 +10,49 @@ defmodule FosterWeb.Components.Question1b do
       |> assign(:media, false)
       |> assign(:internet, false)
       |> assign(:social_media, false)
+      |> assign(:organizations, false)
     }
   end
 
-  # def update(%{branch: type}, socket) do
-  #   {:ok,
-  #     socket
-  #     |> assign(:path, "")
-  #   }
-  # end
-
   def update(params, socket) do
-    IO.inspect(params)
     {:ok,
       socket
-      |> assign(:type, "")
+      |> assign(:path, params.path)
+      |> assign(:answers, params.answers)
     }
   end
 
   def handle_event("validate", params, socket) do
+    IO.inspect(params)
     {:noreply,
       socket
       |> assign(:people, params["people"])
       |> assign(:media, params["media"])
       |> assign(:internet, params["internet"])
       |> assign(:social_media, params["social_media"])
+      |> assign(:organizations, params["organizations"])
     }
   end
 
-  def handle_event("submit", _params, socket) do
+  def handle_event("submit", params, socket) do
+
+    filtered_answers = 
+      params
+      |> Enum.filter(fn {_, value} -> value == "true" end)
+      |> Enum.map(fn {key, _} -> key end)
+
+    updated_answers = Map.put(
+      socket.assigns.answers,
+      :heard_about_fostering,
+      filtered_answers
+    )
+
     {:noreply,
       socket
+      |> assign(:type, "")
       |> assign(:slide_1, false)
       |> assign(:slide_2, true)
+      |> assign(:answers, updated_answers)
     }
   end
 
@@ -67,31 +77,32 @@ defmodule FosterWeb.Components.Question1b do
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="people" checked={@people == "true"} />
         <div>
-          <p class="font-nohemt">De pessoas</p>
+          <p class="font-nohemt">Redes sociais (Facebook, Instagram, outros)</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="internet" checked={@internet == "true"} />
         <div>
-          <p class="font-nohemt">Atraves internet</p>
+          <p class="font-nohemt">TV, Rádio ou Jornal</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="media" checked={@media == "true"} />
         <div>
-          <p class="font-nohemt">Atraves media</p>
+          <p class="font-nohemt">Familiares, amigos, colegas</p>
         </div>
       </div>
-
-
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
-        <p class="font-nohemt">Atraves media socias</p>
+        <p class="font-nohemt">Instituições governamentais</p>
       </div>
-
       <div class="flex items-center gap-2">
-        <.label>Other</.label>
+        <.input type="checkbox" name="social_media" checked={@organizations == "true"} />
+        <p class="font-nohemt">Organizações sem fins lucrativos</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <.label>Outros (especificar)</.label>
         <.input name="other" value="" placeholder="other"/>
       </div>
 
@@ -101,7 +112,7 @@ defmodule FosterWeb.Components.Question1b do
     </div>
     <% end %>
       <%= if @slide_2 do %>
-        <.live_component module={FosterWeb.Components.Question2} id="question_2" branch={assigns.type} />
+        <.live_component module={FosterWeb.Components.Question2} id="question_2" path={@path} answers={@answers} />
       <% end %>
     </div>
     """

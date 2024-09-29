@@ -18,7 +18,13 @@ defmodule FosterWeb.Components.Question0 do
   end
 
   def handle_event("submit", params, socket) do
-    updated_answers = Map.put(%{}, :question_0, params["question_0"])
+    answer = 
+      case params["question_0"] do
+        "1" -> "yes"
+        "0" -> "no"
+      end
+
+    updated_answers = Map.put(%{}, :knowledge, answer)
 
     {:noreply,
      socket
@@ -36,15 +42,16 @@ defmodule FosterWeb.Components.Question0 do
           <div class="mb-4">
             <img src="/images/somekids.svg" />
           </div>
-          <p class="text-2xl">
-            <span class="font-bold font-nohemi ">
-              Já ouviu falar sobre famílias de acolhimento?
-            </span>
-            Ajude-nos a criar uma maior consciêncialização para famílias de acolhimento e explore diferentes estatísticas.
-          </p>
-          <p class="text-2xl text-light_dark_matter font-inter">
-            Tens algum conhecimento sobre famílias de acolhimento em Portugal?
-          </p>
+        <p class="text-2xl">
+        <span class="font-bold font-nohemi ">
+        Sabe que em Portugal há mais de 6000 crianças e jovens a viver em instituições? 
+
+        </span>
+        Descubra a importância do Acolhimento Familiar para Crianças e Jovens e como poderá ter impacto.
+        </p>
+        <p class="text-2xl text-light_dark_matter font-inter">
+        Já ouviu falar de Acolhimento Familiar?
+        </p>
 
       <.simple_form
       for={}
@@ -66,7 +73,7 @@ defmodule FosterWeb.Components.Question0 do
         </div>
       <% end %>
       <%= if @slide_1 do %>
-        <.live_component module={FosterWeb.Components.Question1a} id="question_1_a" branch={@path} answers={@answers} />
+        <.live_component module={FosterWeb.Components.Question1a} id="question_1_a" path={@path} answers={@answers} />
         <% end %>
     </div>
     """

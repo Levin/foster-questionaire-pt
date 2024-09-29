@@ -6,34 +6,41 @@ defmodule FosterWeb.Components.Question2 do
      socket
      |> assign(:slide_2, true)
      |> assign(:slide_3, false)
-     |> assign(:name, "")
-     |> assign(:email, "")
-     |> assign(:age, nil)
-     |> assign(:education, "")}
+     |> assign(:path, "")
+     |> assign(:answers, %{})
+    }
   end
 
   def update(params, socket) do
-    IO.inspect(params)
-
     {:ok,
      socket
-     |> assign(:path, params["type"])}
+      |> assign(:answers, params.answers)
+    }
   end
 
   def handle_event("validate", params, socket) do
     {:noreply,
      socket
-     |> assign(:name, params["name"])
-     |> assign(:email, params["email"])
      |> assign(:age, params["age"])
-     |> assign(:education, params["education"])}
+     |> assign(:region, params["region"])
+     |> assign(:sex, params["sex"])
+    }
   end
 
-  def handle_event("submit", _params, socket) do
+  def handle_event("submit", params, socket) do
+
+    updated_answers = 
+      socket.assigns.answers
+      |> Map.put(:agespan, params["age"])
+      |> Map.put(:gender, params["sex"])
+      |> Map.put(:pt_region, params["region"])
+
     {:noreply,
      socket
+     |> assign(:answers, updated_answers)
      |> assign(:slide_2, false)
-     |> assign(:slide_3, true)}
+     |> assign(:slide_3, true)
+    }
   end
 
   def render(assigns) do
@@ -50,22 +57,17 @@ defmodule FosterWeb.Components.Question2 do
 
           <.simple_form for={} phx-change="validate" phx-submit="submit" phx-target={@myself}>
             <div class="flex items-center gap-2">
-              <.label>Your Name</.label>
-              <.input name="name" value="" placeholder="Name" />
-            </div>
-
-            <div class="flex items-center gap-2">
-              <.label>Your Email</.label>
-              <.input name="email" value="" placeholder="Email" />
-            </div>
-
-            <div class="flex items-center gap-2">
               <.label>Your Age</.label>
-              <.input name="age" value="" placeholder="Age" />
+              <.input name="age" value="" placeholder="Age" type="select" options={["18-25", "26-35", "36-49", "50-65"]} />
             </div>
             <div class="flex items-center gap-2">
-              <.label>Your Education</.label>
-              <.input name="education" value="" placeholder="Education" />
+              <.label>Your Gender</.label>
+              <.input name="sex" value="" placeholder="Sex" type="select" options={["feminino", "maskulino"]} />
+            </div>
+            <div class="flex items-center gap-2">
+              <.label>Region in Portugal</.label>
+              <.input name="region" value="" placeholder="Region" type="select" options={["aveiro", "beja", "braga", "bragança", "castelo_branco", "coimbra", "evora", "faro", "guarda", "leiria", "lisboa", "porto", "santarem", "setubal", "viana_do_castelo", "vila_real", "viseu", "madeira", "acores"]}
+        />
             </div>
             <.button>Submeter</.button>
           </.simple_form>
@@ -76,6 +78,7 @@ defmodule FosterWeb.Components.Question2 do
           module={FosterWeb.Components.Question3}
           id="question_3"
           branch={assigns.path}
+          answers={@answers}
         />
       <% end %>
     </div>

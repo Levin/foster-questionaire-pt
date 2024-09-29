@@ -10,7 +10,10 @@ defmodule FosterWeb.Components.Question8 do
 
   def update(params, socket) do
     IO.inspect(params)
-    {:ok, socket}
+    {:ok, 
+      socket
+      |> assign(:answers, params.answers)
+    }
   end
 
   def handle_event("validate", params, socket) do
@@ -49,7 +52,7 @@ defmodule FosterWeb.Components.Question8 do
       <% end %>
 
       <%= if @slide_9 do %>
-        <.live_component module={FosterWeb.Components.End} id="end" type={@type} />
+        <.live_component module={FosterWeb.Components.End} id="end" type={@type} answers={@answers} />
       <% end %>
     </div>
     """
