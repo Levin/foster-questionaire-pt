@@ -82,7 +82,7 @@ defmodule FosterWeb.Components.Question2 do
       </div>
       <% end %>
       <%= if @slide_3 do %>
-        <.live_component module={FosterWeb.Components.Question3} id="question_3" branch={assigns.type} />
+        <.live_component module={FosterWeb.Components.Question3} id="question_3" branch={assigns.path} />
       <% end %>
     </div>
     """
