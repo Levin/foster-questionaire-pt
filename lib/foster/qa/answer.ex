@@ -3,7 +3,7 @@ defmodule Foster.QA.Answer do
   import Ecto.Changeset
 
   schema "answers" do
-    field :body, :string
+    field :body, :map
     belongs_to :question, Foster.QA.Question
 
     timestamps()
@@ -11,8 +11,7 @@ defmodule Foster.QA.Answer do
 
   def changeset(answer, attrs) do
     answer
-    |> cast(attrs, [:body, :question_id])
-    |> validate_required([:body, :question_id])
-    |> foreign_key_constraint(:question_id)
+    |> cast(attrs, [:body])
+    |> validate_required([:body])
   end
 end
