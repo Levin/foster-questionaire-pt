@@ -19,24 +19,16 @@ defmodule FosterWeb.Components.Question3 do
     IO.inspect(params)
     {:ok,
       socket
-      |> assign(:type, "")
     }
   end
 
-  def handle_event("validate", params, socket) do
-    {:noreply,
-      socket
-      |> assign(:one, params["one"])
-      |> assign(:two, params["two"])
-      |> assign(:three, params["three"])
-      |> assign(:four, params["four"])
-      |> assign(:five, params["five"])
-    }
-  end
+  def handle_event("submit", params, socket) do
+    updated_answers = Map.put(%{}, :question_3, params["question_3"])
 
-  def handle_event("submit", _params, socket) do
     {:noreply,
       socket
+      |> assign(:path, params["question_3"])
+      |> assign(:answers, updated_answers)
       |> assign(:slide_3, false)
       |> assign(:slide_4, true)
     }
@@ -56,37 +48,32 @@ defmodule FosterWeb.Components.Question3 do
 
       <.simple_form
         for={}
-        phx-change="validate"
         phx-submit="submit"
         phx-target={@myself}
         >
+
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="one" checked={@one == "true"} />
-        <div>
-          <p class="font-nohemt">1</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="two" checked={@two == "true"} />
-        <div>
-          <p class="font-nohemt">2</p>
-        </div>
+        <input type="radio" name="question_3" value="1" >
+        <p class="font-nohemt">1</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="three" checked={@three == "true"} />
-        <div>
-          <p class="font-nohemt">3</p>
-        </div>
+        <input type="radio" name="question_3" value="2" >
+        <p class="font-nohemt">2</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="four" checked={@four == "true"} />
+        <input type="radio" name="question_3" value="3" >
+        <p class="font-nohemt">3</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input type="radio" name="question_3" value="4" >
         <p class="font-nohemt">4</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="five" checked={@five == "true"} />
+        <input type="radio" name="question_3" value="5" >
         <p class="font-nohemt">5</p>
       </div>
 
@@ -96,7 +83,7 @@ defmodule FosterWeb.Components.Question3 do
       </div>
       <% end %>
       <%= if @slide_4 do %>
-        <.live_component module={FosterWeb.Components.Question4} id="question_4" branch={assigns.type} />
+        <.live_component module={FosterWeb.Components.Question4} id="question_4" branch={@path} answers={@answers} />
       <% end %>
     </div>
     """

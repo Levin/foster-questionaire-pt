@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question11 do
+defmodule FosterWeb.Components.Question1b do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -89,6 +89,12 @@ defmodule FosterWeb.Components.Question11 do
         <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
         <p class="font-nohemt">Atraves media socias</p>
       </div>
+
+      <div class="flex items-center gap-2">
+        <.label>Other</.label>
+        <.input name="other" value="" placeholder="other"/>
+      </div>
+
       <.button>Submeter</.button>
       </.simple_form>
 
@@ -100,20 +106,4 @@ defmodule FosterWeb.Components.Question11 do
     </div>
     """
   end
-
-  # defp check_path(assigns) when assigns.path == "0" do
-  #   ~H"""
-  #   <.live_component module={FosterWeb.Components.Question51} id="question_5" path={@path}/>
-  #   """
-  # end
-  # defp check_path(assigns) when assigns.path == "1" do
-  #   ~H"""
-  #   <.live_component module={FosterWeb.Components.Question3} id="question_3" path={@path}/>
-  #   """
-  # end
-  # defp check_path(assigns) when assigns.path == "2" do
-  #   ~H"""
-  #   <.live_component module={FosterWeb.Components.Question1} id="question_1" path={@path}/>
-  #   """
-  # end
 end
