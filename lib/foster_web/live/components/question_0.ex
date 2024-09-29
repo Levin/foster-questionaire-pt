@@ -63,12 +63,12 @@ defmodule FosterWeb.Components.Question0 do
       >
       <div class="flex items-center gap-2">
         <input type="radio" name="question_0" value="0" >
-        <p class="font-nohemt">Não tenho.</p>
+        <p class="font-nohemt">Não</p>
       </div>
 
       <div class="flex items-center gap-2">
         <input type="radio" name="question_0" value="1">
-        <p class="font-nohemt">Sim, tenho.</p>
+        <p class="font-nohemt">Sim</p>
       </div>
 
             <.button>Submeter</.button>

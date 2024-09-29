@@ -52,7 +52,7 @@ defmodule FosterWeb.Components.Question5 do
         <img src="/images/somekids.svg" />
       </div>
       <p class="text-2xl text-light_dark_matter font-inter">
-        Quais os principais desafios para aculher uma crianca?
+      Qoais são os principais desafios para que seja uma Família de Acolhimento?
       </p>
 
       <.simple_form
@@ -63,28 +63,35 @@ defmodule FosterWeb.Components.Question5 do
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="Financial" checked={@money == "true"} />
         <div>
-          <p class="font-nohemt">Financial</p>
+          <p class="font-nohemt">Encargo financeiro adicional</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Living Conditions" checked={@conditions == "true"} />
+        <.input type="checkbox" name="Housing Conditions" checked={@money == "true"} />
         <div>
-          <p class="font-nohemt">Home conditions</p>
+          <p class="font-nohemt"> Condições habitacionais actuais</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Fear of Attachment/Loss" checked={@fear1 == "true"} />
+        <.input type="checkbox" name="Workload" checked={@conditions == "true"} />
         <div>
-          <p class="font-nohemt">Fear of attachment + loss</p>
+          <p class="font-nohemt">Limitações por motivos profissionais</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Fear of a difficult child" checked={@fear2 == "true"} />
+        <.input type="checkbox" name="Family Reasons" checked={@fear1 == "true"} />
         <div>
-          <p class="font-nohemt">Fear a "difficult" child</p>
+          <p class="font-nohemt">Contexto familiar actual desafiante</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="Unexperienced Parents" checked={@fear2 == "true"} />
+        <div>
+          <p class="font-nohemt">Inexperiência parental</p>
         </div>
       </div>
 

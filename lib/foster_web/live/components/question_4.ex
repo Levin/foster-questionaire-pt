@@ -52,7 +52,7 @@ defmodule FosterWeb.Components.Question4 do
         <img src="/images/somekids.svg" />
       </div>
       <p class="text-2xl text-light_dark_matter font-inter">
-        Quais os principais motivos para considerar ser uma Família de Acolhimento?
+      Quais são os principais motivos da sua resposta anterior?
       </p>
 
       <.simple_form
@@ -61,27 +61,32 @@ defmodule FosterWeb.Components.Question4 do
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="altruism" checked={@altruism == "true"} />
+        <.input type="checkbox" name="Cannot have kids" checked={@altruism == "true"} />
         <div>
-          <p class="font-nohemt">Altruism</p>
+          <p class="font-nohemt">Não poder ter filhos</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="money" checked={@money == "true"} />
+        <.input type="checkbox" name="Altruism" checked={@money == "true"} />
         <div>
-          <p class="font-nohemt">Money support</p>
+          <p class="font-nohemt">Assegurar ambiente familiar a uma criança vulnerável</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="Financial Benefits" checked={@money == "true"} />
+        <div>
+          <p class="font-nohemt">Apoio e benefícios financeiros</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="No Interest" checked={@money == "true"} />
+        <div>
+          <p class="font-nohemt">Não tenho interesse</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="love" checked={@love == "true"} />
-        <div>
-          <p class="font-nohemt">Talent + love for children</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <.label>Other</.label>
+        <.label>Outro</.label>
         <.input name="other" value="" placeholder="other"/>
       </div>
 
