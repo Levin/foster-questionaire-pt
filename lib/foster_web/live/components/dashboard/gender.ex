@@ -18,7 +18,7 @@ defmodule FosterWeb.Components.Dashboard.Gender do
       colour_palette: ["fbb4ae", "b3cde3", "ccebc5", "dd2312"],
       legend_setting: :legend_right,
       data_labels: false,
-      title: "Age-spans of all the participants"
+      title: "Gender of Participants"
     ]
 
     plot = 
