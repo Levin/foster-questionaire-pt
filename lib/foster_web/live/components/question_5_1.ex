@@ -9,11 +9,13 @@ defmodule FosterWeb.Components.Question51 do
     }
   end
 
-  def update(params, socket) do
-    IO.inspect(params)
+  def update(%{path: path, answers: answers}, socket) do
+    IO.inspect("answers in question 51")
+    IO.inspect(answers)
     {:ok, 
       socket
-      |> assign(:path, params["path"])
+      |> assign(:path, path)
+      |> assign(:answers, answers)
     }
   end
 
@@ -23,9 +25,13 @@ defmodule FosterWeb.Components.Question51 do
     }
   end
 
-  def handle_event("submit", _params, socket) do
+  def handle_event("submit", params, socket) do
+    updated_answers = 
+      Map.put(socket.assigns.answers, :question_51, params["question_51"])
+
     {:noreply,
       socket
+      |> assign(:answers, updated_answers)
       |> assign(:slide_5, false)
       |> assign(:slide_6, true)
     }
@@ -46,11 +52,11 @@ defmodule FosterWeb.Components.Question51 do
       phx-target={@myself}
       >
         <div class="flex items-center gap-2">
-        <input type="radio" name="motivos" value="0" />
+        <input type="radio" name="question_51" value="0" />
         <p class="font-nohemt">Yes</p>
         </div>
         <div class="flex items-center gap-2">
-        <input type="radio" name="motivos" value="1" />
+        <input type="radio" name="question_51" value="1" />
         <p class="font-nohemt">No</p>
         </div>
       <.button>Submeter</.button>
@@ -58,7 +64,7 @@ defmodule FosterWeb.Components.Question51 do
         <% end %>
 
       <%= if @slide_6 do %>
-        <.live_component module={FosterWeb.Components.Question61} id="question_61" path={@path}/>
+        <.live_component module={FosterWeb.Components.Question61} id="question_61" path={@path} answers={@answers}/>
         <% end %>
     </div>
     """

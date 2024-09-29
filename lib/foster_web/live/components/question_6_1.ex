@@ -9,11 +9,12 @@ defmodule FosterWeb.Components.Question61 do
     }
   end
 
-  def update(params, socket) do
-    IO.inspect(params)
+  def update(%{path: path, answers: answers}, socket) do
+    IO.inspect("answers in question 61")
+    IO.inspect(answers)
     {:ok, 
       socket
-      |> assign(:path, params["path"])
+      |> assign(:path, path)
     }
   end
 
@@ -60,7 +61,7 @@ defmodule FosterWeb.Components.Question61 do
         <% end %>
 
       <%= if @slide_7 do %>
-        <.live_component module={FosterWeb.Components.Question81} id="question_81" path={@path}/>
+        <.live_component module={FosterWeb.Components.Question81} id="question_81" path={@path} answers={@answers} />
         <% end %>
 
     </div>

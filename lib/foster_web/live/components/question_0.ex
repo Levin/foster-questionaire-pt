@@ -13,20 +13,20 @@ defmodule FosterWeb.Components.Question0 do
     }
   end
 
-
-  def handle_event("validate", params, socket) do
+  def update(params, socket) do
     IO.inspect(params)
-    {:noreply,
-      socket
-      |> assign(:path, params["path"])
-    }
+    {:ok, socket}
   end
 
-  def handle_event("submit", _params, socket) do
+  def handle_event("submit", params, socket) do
+    updated_answers = Map.put(%{}, :question_0, params["question_0"])
+
     {:noreply,
      socket
-     |> assign(:slide_0, false)
-     |> assign(:slide_1, true)
+      |> assign(:path, params["question_0"])
+      |> assign(:answers, updated_answers)
+      |> assign(:slide_0, false)
+      |> assign(:slide_1, true)
     }
   end
 
@@ -51,22 +51,21 @@ defmodule FosterWeb.Components.Question0 do
 
       <.simple_form
       for={}
-      phx-change="validate"
       phx-submit="submit"
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-        <input type="radio" name="path" value="0" >
+        <input type="radio" name="question_0" value="0" >
         <p class="font-nohemt">Não tenho conhecimento.</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <input type="radio" name="path" value="1" >
+        <input type="radio" name="question_0" value="1" >
         <p class="font-nohemt">Não tenho, mas gostava de ter.</p>
       </div>
 
       <div class="flex items-center gap-2">
-        <input type="radio" name="path" value="2">
+        <input type="radio" name="question_0" value="2">
         <p class="font-nohemt">Tenho.</p>
       </div>
 
@@ -77,7 +76,7 @@ defmodule FosterWeb.Components.Question0 do
     </div>
       <% end %>
       <%= if @slide_1 do %>
-        <.live_component module={FosterWeb.Components.Question1} id="question_1" branch={@path} />
+        <.live_component module={FosterWeb.Components.Question1} id="question_1" branch={@path} answers={@answers} />
         <% end %>
     </div>
     """
