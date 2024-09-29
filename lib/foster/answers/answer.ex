@@ -1,10 +1,9 @@
-defmodule Foster.QA.Answer do
+defmodule Foster.Answers.Answer do
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "answers" do
     field :body, :map
-    belongs_to :question, Foster.QA.Question
 
     timestamps()
   end
