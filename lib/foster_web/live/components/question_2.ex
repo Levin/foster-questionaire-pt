@@ -23,16 +23,16 @@ defmodule FosterWeb.Components.Question2 do
      socket
      |> assign(:age, params["age"])
      |> assign(:region, params["region"])
-     |> assign(:gender, params["gender"])
+     |> assign(:sex, params["sex"])
     }
   end
 
   def handle_event("submit", params, socket) do
 
-    updated_answers =
+    updated_answers = 
       socket.assigns.answers
       |> Map.put(:agespan, params["age"])
-      |> Map.put(:gender, params["gender"])
+      |> Map.put(:gender, params["sex"])
       |> Map.put(:pt_region, params["region"])
 
     {:noreply,
@@ -57,15 +57,15 @@ defmodule FosterWeb.Components.Question2 do
 
           <.simple_form for={} phx-change="validate" phx-submit="submit" phx-target={@myself}>
             <div class="flex items-center gap-2">
-              <.label>Idade</.label>
+              <.label>Your Age</.label>
               <.input name="age" value="" placeholder="Age" type="select" options={["18-25", "26-35", "36-49", "50-65"]} />
             </div>
             <div class="flex items-center gap-2">
-              <.label>Gênero</.label>
-              <.input name="gender" value="" placeholder="Gender" type="select" options={["Não Binário", "Prefiro não dizer","Feminino", "Masculino"]} />
+              <.label>Your Gender</.label>
+              <.input name="sex" value="" placeholder="Sex" type="select" options={["Non-Binary", "I prefeer not to say","feminino", "maskulino"]} />
             </div>
             <div class="flex items-center gap-2">
-              <.label>Região</.label>
+              <.label>Region in Portugal</.label>
               <.input name="region" value="" placeholder="Region" type="select" options={["aveiro", "beja", "braga", "bragança", "castelo_branco", "coimbra", "evora", "faro", "guarda", "leiria", "lisboa", "porto", "santarem", "setubal", "viana_do_castelo", "vila_real", "viseu", "madeira", "acores"]}
         />
             </div>
