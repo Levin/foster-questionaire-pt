@@ -7,15 +7,13 @@ defmodule FosterWeb.Components.Question2 do
      |> assign(:slide_2, true)
      |> assign(:slide_3, false)
      |> assign(:path, "")
-     |> assign(:answers, %{})
-    }
+     |> assign(:answers, %{})}
   end
 
   def update(params, socket) do
     {:ok,
      socket
-      |> assign(:answers, params.answers)
-    }
+     |> assign(:answers, params.answers)}
   end
 
   def handle_event("validate", params, socket) do
@@ -23,12 +21,10 @@ defmodule FosterWeb.Components.Question2 do
      socket
      |> assign(:age, params["age"])
      |> assign(:region, params["region"])
-     |> assign(:gender, params["gender"])
-    }
+     |> assign(:gender, params["gender"])}
   end
 
   def handle_event("submit", params, socket) do
-
     updated_answers =
       socket.assigns.answers
       |> Map.put(:agespan, params["age"])
@@ -39,8 +35,7 @@ defmodule FosterWeb.Components.Question2 do
      socket
      |> assign(:answers, updated_answers)
      |> assign(:slide_2, false)
-     |> assign(:slide_3, true)
-    }
+     |> assign(:slide_3, true)}
   end
 
   def render(assigns) do
@@ -58,16 +53,53 @@ defmodule FosterWeb.Components.Question2 do
           <.simple_form for={} phx-change="validate" phx-submit="submit" phx-target={@myself}>
             <div class="flex items-center gap-2">
               <.label>Idade</.label>
-              <.input name="age" value="" placeholder="Age" type="select" options={["18-25", "26-35", "36-49", "50-65"]} />
+              <.input
+                name="age"
+                value=""
+                placeholder="Age"
+                type="select"
+                options={["18-25", "26-35", "36-49", "50-65"]}
+              />
             </div>
             <div class="flex items-center gap-2">
               <.label>Gênero</.label>
-              <.input name="gender" value="" placeholder="Gender" type="select" options={["Não Binário", "Prefiro não dizer","Feminino", "Masculino"]} />
+              <.input
+                name="gender"
+                value=""
+                placeholder="Gender"
+                type="select"
+                options={["Não Binário", "Prefiro não dizer", "Feminino", "Masculino"]}
+              />
             </div>
             <div class="flex items-center gap-2">
               <.label>Região</.label>
-              <.input name="region" value="" placeholder="Region" type="select" options={["aveiro", "beja", "braga", "bragança", "castelo_branco", "coimbra", "evora", "faro", "guarda", "leiria", "lisboa", "porto", "santarem", "setubal", "viana_do_castelo", "vila_real", "viseu", "madeira", "acores"]}
-        />
+              <.input
+                name="region"
+                value=""
+                placeholder="Region"
+                type="select"
+                options={[
+                  "aveiro",
+                  "beja",
+                  "braga",
+                  "bragança",
+                  "castelo_branco",
+                  "coimbra",
+                  "evora",
+                  "faro",
+                  "guarda",
+                  "leiria",
+                  "lisboa",
+                  "porto",
+                  "santarem",
+                  "setubal",
+                  "viana_do_castelo",
+                  "vila_real",
+                  "viseu",
+                  "madeira",
+                  "acores"
+                ]}
+              />
             </div>
             <.button>Submeter</.button>
           </.simple_form>

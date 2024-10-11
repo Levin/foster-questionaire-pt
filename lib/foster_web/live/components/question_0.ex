@@ -3,13 +3,12 @@ defmodule FosterWeb.Components.Question0 do
 
   def mount(socket) do
     {:ok,
-      socket
-      |> assign(:slide_0, true)
-      |> assign(:slide_1, false)
-      |> assign(:is_true, false)
-      |> assign(:no_knowledge, false)
-      |> assign(:knowledge, false)
-    }
+     socket
+     |> assign(:slide_0, true)
+     |> assign(:slide_1, false)
+     |> assign(:is_true, false)
+     |> assign(:no_knowledge, false)
+     |> assign(:knowledge, false)}
   end
 
   def update(params, socket) do
@@ -42,42 +41,43 @@ defmodule FosterWeb.Components.Question0 do
           <div class="mb-4">
             <img src="/images/somekids.svg" />
           </div>
-        <p class="text-2xl">
-          <span class="font-bold font-nohemi">
-            Sabe que em Portugal há mais de 6000 crianças e jovens a viver em instituições?
-          </span>
-        </p>
-        <p class="text-light_dark_matter font-inter">
-        Descubra a importância do Acolhimento Familiar para Crianças e Jovens e como poderá ter impacto.
-        A participação é anónima. Demora apenas 5 minutos.
-        </p>
+          <p class="text-2xl">
+            <span class="font-bold font-nohemi">
+              Sabe que em Portugal há mais de 6000 crianças e jovens a viver em instituições?
+            </span>
+          </p>
+          <p class="text-light_dark_matter font-inter">
+            Descubra a importância do Acolhimento Familiar para Crianças e Jovens e como poderá ter impacto.
+            A participação é anónima. Demora apenas 5 minutos.
+          </p>
 
-        <p class="text-2xl text-light_dark_matter font-inter">
-        Já ouviu falar de Acolhimento Familiar?
-        </p>
+          <p class="text-2xl text-light_dark_matter font-inter">
+            Já ouviu falar de Acolhimento Familiar?
+          </p>
 
-      <.simple_form
-      for={}
-      phx-submit="submit"
-      phx-target={@myself}
-      >
-      <div class="flex items-center gap-2">
-        <input type="radio" name="question_0" value="0" >
-        <p class="font-nohemt">Não</p>
-      </div>
+          <.simple_form for={} phx-submit="submit" phx-target={@myself}>
+            <div class="flex items-center gap-2">
+              <input type="radio" name="question_0" value="0" />
+              <p class="font-nohemt">Não</p>
+            </div>
 
-      <div class="flex items-center gap-2">
-        <input type="radio" name="question_0" value="1">
-        <p class="font-nohemt">Sim</p>
-      </div>
+            <div class="flex items-center gap-2">
+              <input type="radio" name="question_0" value="1" />
+              <p class="font-nohemt">Sim</p>
+            </div>
 
             <.button>Submeter</.button>
           </.simple_form>
         </div>
       <% end %>
       <%= if @slide_1 do %>
-        <.live_component module={FosterWeb.Components.Question1a} id="question_1_a" path={@path} answers={@answers} />
-        <% end %>
+        <.live_component
+          module={FosterWeb.Components.Question1a}
+          id="question_1_a"
+          path={@path}
+          answers={@answers}
+        />
+      <% end %>
     </div>
     """
   end
