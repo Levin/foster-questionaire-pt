@@ -7,11 +7,11 @@ defmodule FosterWeb.Components.Question3 do
       socket
       |> assign(:slide_3, true)
       |> assign(:slide_4, false)
-      |> assign(:one, false)
-      |> assign(:two, false)
-      |> assign(:three, false)
-      |> assign(:four, false)
-      |> assign(:five, false)
+      # |> assign(:one, false)
+      # |> assign(:two, false)
+      # |> assign(:three, false)
+      # |> assign(:four, false)
+      # |> assign(:five, false)
     }
   end
 
@@ -27,13 +27,14 @@ defmodule FosterWeb.Components.Question3 do
     IO.inspect(params)
     IO.inspect(socket)
 
-    updated_answers = 
+    updated_answers =
       Map.put(
         socket.assigns.answers,
         :becoming_foster,
         params["question_3"]
       )
 
+      IO.inspect(updated_answers, label: "Answers after Q3")
     {:noreply,
       socket
       |> assign(:answers, updated_answers)

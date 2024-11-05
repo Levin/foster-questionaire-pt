@@ -1,22 +1,21 @@
-defmodule FosterWeb.Components.Dashboard.MotivesAgainst do
+defmodule FosterWeb.Components.Dashboard.Justification do
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    motives = 
+    justification =
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["motive_against_fostering"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn answer -> answer.body["justification"] end)
+      |> List.flatten
 
-    IO.inspect(motives)
+    dataset = Dataset.new(justification)
 
-    dataset =
-      Dataset.new(motives)
+    IO.inspect(justification)
 
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
-    {:ok, 
+    {:ok,
       socket
       |> assign(:plot, plot)
     }
@@ -25,6 +24,7 @@ defmodule FosterWeb.Components.Dashboard.MotivesAgainst do
   def render(assigns) do
     ~H"""
     <div>
+      <%= Contex.Plot.to_svg(@plot) %>
     </div>
     """
   end

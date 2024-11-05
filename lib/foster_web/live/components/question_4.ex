@@ -6,14 +6,17 @@ defmodule FosterWeb.Components.Question4 do
       socket
       |> assign(:slide_4, true)
       |> assign(:slide_5, false)
+      |> assign(:baren, false)
       |> assign(:altruism, false)
       |> assign(:money, false)
-      |> assign(:love, false)
+      |> assign(:nomoney, false)
+      |> assign(:nointerest, false)
+      |> assign(:other, "")
     }
   end
 
   def update(params, socket) do
-    {:ok, 
+    {:ok,
       socket
       |> assign(:answers, params.answers)
     }
@@ -21,19 +24,30 @@ defmodule FosterWeb.Components.Question4 do
 
 
   def handle_event("submit", params, socket) do
-    filtered_answers = 
+    filtered_answers =
       params
       |> Enum.filter(fn {_, value} -> value == "true" end)
       |> Enum.map(fn {key, _} -> key end)
 
-    IO.inspect(filtered_answers)
 
-    updated_answers = Map.put(
-      socket.assigns.answers, 
-      :motive_for_fostering, 
-      filtered_answers
-    )
+    other_answer = params["other"]
 
+    updated_answers =
+      if other_answer != "" do
+        Map.put(
+          socket.assigns.answers,
+          :justification,
+          filtered_answers ++ [[other: other_answer]]
+        )
+      else
+        Map.put(
+          socket.assigns.answers,
+          :justification,
+          filtered_answers
+        )
+      end
+
+    IO.inspect(updated_answers, label: "Answers after Q4")
     {:noreply,
       socket
       |> assign(:path, params["question_4"])
@@ -61,28 +75,28 @@ defmodule FosterWeb.Components.Question4 do
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Cannot have kids" checked={@altruism == "true"} />
-        <div>
-          <p class="font-nohemt">Não poder ter filhos</p>
-        </div>
+        <.input type="checkbox" name="Cannot have kids" checked={@baren == "true"} />
+        <p class="font-nohemt">Incapacidade de ter filhos</p>
       </div>
+
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Altruism" checked={@money == "true"} />
-        <div>
-          <p class="font-nohemt">Assegurar ambiente familiar a uma criança vulnerável</p>
-        </div>
+        <.input type="checkbox" name="Altruism" checked={@altruism == "true"} />
+        <p class="font-nohemt">Assegurar ambiente familiar a uma criança vulnerável</p>
       </div>
+
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Financial Benefits" checked={@money == "true"} />
-        <div>
-          <p class="font-nohemt">Apoio e benefícios financeiros</p>
-        </div>
+        <.input type="checkbox" name="Financial benefits" checked={@money == "true"} />
+        <p class="font-nohemt">Apoio e benefícios financeiros</p>
       </div>
+
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="No Interest" checked={@money == "true"} />
-        <div>
-          <p class="font-nohemt">Não tenho interesse</p>
-        </div>
+        <.input type="checkbox" name="Insufficient financial benefits" checked={@nomoney == "true"} />
+        <p class="font-nohemt">Insuficiente apoio e benefícios financeiro</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="No Interest" checked={@nointerest == "true"} />
+        <p class="font-nohemt">Falta de interesse</p>
       </div>
 
       <div class="flex items-center gap-2">

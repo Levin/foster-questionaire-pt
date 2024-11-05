@@ -13,7 +13,6 @@ defmodule FosterWeb.Components.Question0 do
   end
 
   def update(params, socket) do
-    IO.inspect(params)
     {:ok, socket}
   end
 
@@ -25,7 +24,7 @@ defmodule FosterWeb.Components.Question0 do
       end
 
     updated_answers = Map.put(%{}, :knowledge, answer)
-
+    IO.inspect(updated_answers, label: "Answers after Q0")
     {:noreply,
      socket
      |> assign(:path, params["question_0"])

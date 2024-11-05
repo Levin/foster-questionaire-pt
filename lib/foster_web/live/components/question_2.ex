@@ -35,6 +35,7 @@ defmodule FosterWeb.Components.Question2 do
       |> Map.put(:gender, params["gender"])
       |> Map.put(:pt_region, params["region"])
 
+    IO.inspect(updated_answers, label: "Answers after Q2")
     {:noreply,
      socket
      |> assign(:answers, updated_answers)
@@ -58,11 +59,11 @@ defmodule FosterWeb.Components.Question2 do
           <.simple_form for={} phx-change="validate" phx-submit="submit" phx-target={@myself}>
             <div class="flex items-center gap-2">
               <.label>Idade</.label>
-              <.input name="age" value="" placeholder="Age" type="select" options={["18-25", "26-35", "36-49", "50-65"]} />
+              <.input name="age" value="" placeholder="Age" type="select" options={["18-25", "26-35", "36-49", "50-65", "66+"]} />
             </div>
             <div class="flex items-center gap-2">
               <.label>Gênero</.label>
-              <.input name="gender" value="" placeholder="Gender" type="select" options={["Não Binário", "Prefiro não dizer","Feminino", "Masculino"]} />
+              <.input name="gender" value="" placeholder="Gender" type="select" options={["Feminino", "Masculino", "Não Binário", "Prefiro não dizer"]} />
             </div>
             <div class="flex items-center gap-2">
               <.label>Região</.label>

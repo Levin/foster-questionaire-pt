@@ -6,11 +6,12 @@ defmodule FosterWeb.Components.Question1b do
       socket
       |> assign(:slide_1, true)
       |> assign(:slide_2, false)
-      |> assign(:people, false)
       |> assign(:media, false)
-      |> assign(:internet, false)
       |> assign(:social_media, false)
-      |> assign(:organizations, false)
+      |> assign(:people, false)
+      |> assign(:gov, false)
+      |> assign(:ngo, false)
+      |> assign(:other, "")
     }
   end
 
@@ -23,30 +24,34 @@ defmodule FosterWeb.Components.Question1b do
   end
 
   def handle_event("validate", params, socket) do
-    IO.inspect(params)
     {:noreply,
       socket
-      |> assign(:people, params["people"])
       |> assign(:media, params["media"])
-      |> assign(:internet, params["internet"])
       |> assign(:social_media, params["social_media"])
-      |> assign(:organizations, params["organizations"])
+      |> assign(:people, params["people"])
+      |> assign(:gov, params["gov"])
+      |> assign(:ngo, params["ngo"])
+      |> assign(:other, params["other"])
     }
   end
 
   def handle_event("submit", params, socket) do
 
-    filtered_answers = 
+    filtered_answers =
       params
       |> Enum.filter(fn {_, value} -> value == "true" end)
       |> Enum.map(fn {key, _} -> key end)
 
-    updated_answers = Map.put(
-      socket.assigns.answers,
-      :heard_about_fostering,
-      filtered_answers
-    )
+    other_answer = params["other"]
 
+    updated_answers =
+      if other_answer != "" do
+        Map.put(socket.assigns.answers, :heard_where, filtered_answers ++ [[other: other_answer]])
+      else
+        Map.put(socket.assigns.answers, :heard_where, filtered_answers)
+      end
+
+    IO.inspect(updated_answers, label: "Answers after Q1b")
     {:noreply,
       socket
       |> assign(:type, "")
@@ -75,32 +80,30 @@ defmodule FosterWeb.Components.Question1b do
       phx-target={@myself}
       >
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="people" checked={@people == "true"} />
-        <div>
-          <p class="font-nohemt">Redes sociais (Facebook, Instagram, outros)</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
-        <.input type="checkbox" name="internet" checked={@internet == "true"} />
-        <div>
+        <.input type="checkbox" name="media" checked={@media == "true"} />
           <p class="font-nohemt">TV, Rádio ou Jornal</p>
-        </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="media" checked={@media == "true"} />
-        <div>
-          <p class="font-nohemt">Familiares, amigos, colegas</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2">
         <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
+        <p class="font-nohemt">Redes sociais (Facebook, Instagram, outros)</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="people" checked={@people == "true"} />
+        <p class="font-nohemt">Familiares, amigos, colegas</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <.input type="checkbox" name="gov" checked={@gov == "true"} />
         <p class="font-nohemt">Instituições governamentais</p>
       </div>
+
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="social_media" checked={@organizations == "true"} />
+        <.input type="checkbox" name="ngo" checked={@ngo == "true"} />
         <p class="font-nohemt">Organizações sem fins lucrativos</p>
       </div>
+
       <div class="flex items-center gap-2">
         <.label>Outros (especificar)</.label>
         <.input name="other" value="" placeholder="other"/>
