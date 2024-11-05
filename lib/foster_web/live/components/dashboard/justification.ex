@@ -1,22 +1,24 @@
-defmodule FosterWeb.Components.Dashboard.HeardAbout do
+defmodule FosterWeb.Components.Dashboard.Justification do
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    regions =
+    justification =
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["heard_about_fostering"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
+      |> Enum.map(fn answer -> answer.body["justification"] end)
+      |> List.flatten
 
-    dataset =
-      Dataset.new(regions)
+    dataset = Dataset.new(justification)
+
+    IO.inspect(justification)
 
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
     {:ok,
-     socket
-     |> assign(:plot, plot)}
+      socket
+      |> assign(:plot, plot)
+    }
   end
 
   def render(assigns) do
@@ -26,4 +28,5 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
     </div>
     """
   end
+
 end

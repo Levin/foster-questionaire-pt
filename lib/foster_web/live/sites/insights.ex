@@ -29,7 +29,13 @@ defmodule FosterWeb.Sites.Insights do
       <.live_component module={FosterWeb.Components.Dashboard.MotivesFor} id="motives_for" />
       <.live_component module={FosterWeb.Components.Dashboard.HeardAbout} id="heard_about" />
       <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
+      <.live_component module={FosterWeb.Components.Dashboard.Regions} id="regions" />
     </div>
     """
+
   end
+  #
+  #
+#<.live_component module={FosterWeb.Components.Dashboard.HeardAbout} id="heard_about" />
+    #      <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
 end

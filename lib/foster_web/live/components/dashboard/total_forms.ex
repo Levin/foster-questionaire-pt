@@ -1,6 +1,8 @@
 defmodule FosterWeb.Components.Dashboard.TotalForms do
   use FosterWeb, :live_component
 
+  alias Contex.{Plot, Dataset, BarChart}
+
   def mount(socket) do
     total_calls =
       Foster.Answers.all_answers()

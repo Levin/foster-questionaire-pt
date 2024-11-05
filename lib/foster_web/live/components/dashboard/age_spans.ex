@@ -9,6 +9,7 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
       |> Enum.group_by(fn answer -> answer.body["agespan"] end)
       |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
+
     IO.inspect(spans)
 
     dataset = Dataset.new(spans, ["a", "b", "c", "d"])
@@ -17,17 +18,18 @@ defmodule FosterWeb.Components.Dashboard.AgeSpans do
       mapping: %{category_col: "a", value_col: "b"},
       colour_palette: ["fbb4ae", "b3cde3", "ccebc5", "dd2312"],
       legend_setting: :legend_right,
-      data_labels: false,
-      title: "Age-spans of all the participants"
+      # TODO: data labels should be numbers not percentages I think
+      data_labels: true,
+      title: "Faixa etária de todos os participantes"
     ]
 
     plot =
       Contex.Plot.new(dataset, Contex.PieChart, 600, 400, opts)
 
     {:ok,
-     socket
-     |> assign(:age_spans, spans)
-     |> assign(:plot, plot)}
+      socket
+      |> assign(:age_spans, spans)
+      |> assign(:plot, plot)}
   end
 
   def render(assigns) do
