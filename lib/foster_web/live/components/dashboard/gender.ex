@@ -4,12 +4,13 @@ defmodule FosterWeb.Components.Dashboard.Gender do
   alias Contex.Dataset
 
   def mount(socket) do
-    genders = 
+    genders =
       Foster.Answers.all_answers()
       |> Enum.group_by(fn answer -> answer.body["gender"] end)
       |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
 
-    IO.inspect(genders)
+    # IO.inspect(genders, label: "BLA")
+    # IO.inspect(Foster.Answers.all_answers())
 
     dataset = Dataset.new(genders, ["a", "b", "c", "d"])
 
@@ -17,14 +18,14 @@ defmodule FosterWeb.Components.Dashboard.Gender do
       mapping: %{category_col: "a", value_col: "b"},
       colour_palette: ["fbb4ae", "b3cde3", "ccebc5", "dd2312"],
       legend_setting: :legend_right,
-      data_labels: false,
-      title: "Gender of Participants"
+      data_labels: true,
+      title: "Distribuição de género"
     ]
 
-    plot = 
+    plot =
       Contex.Plot.new(dataset, Contex.PieChart, 600, 400, opts)
 
-    {:ok, 
+    {:ok,
       socket
       |> assign(:plot, plot)
 
