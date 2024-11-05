@@ -1,22 +1,22 @@
-defmodule FosterWeb.Components.Dashboard.Gender do
+defmodule FosterWeb.Components.Dashboard.PriorKnolwedge do
   use FosterWeb, :live_component
 
   alias Contex.Dataset
 
   def mount(socket) do
-    genders =
+    knowledge =
       Foster.Answers.all_answers()
-      |> Enum.group_by(fn answer -> answer.body["gender"] end)
+      |> Enum.group_by(fn answer -> answer.body["knowledge"] end)
       |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
-    dataset = Dataset.new(genders, ["a", "b", "c", "d"])
+    dataset = Dataset.new(knowledge, ["a", "b", "c", "d"])
 
     opts = [
       mapping: %{category_col: "a", value_col: "b"},
       colour_palette: ["fbb4ae", "b3cde3", "ccebc5", "dd2312"],
       legend_setting: :legend_right,
       data_labels: true,
-      title: "Distribuição de género"
+      title: "Conhecimento prévio"
     ]
 
     plot =

@@ -23,11 +23,15 @@ defmodule FosterWeb.Sites.Insights do
       </div>
 
       <div class="h-10"></div>
+       <%!--fostering questions  --%>
+      <.live_component module={FosterWeb.Components.Dashboard.PriorKnolwedge} id="prior_knowledge" />
+      <.live_component module={FosterWeb.Components.Dashboard.HeardWhere} id="heard_where" />
+      <.live_component module={FosterWeb.Components.Dashboard.Likelihood} id="likelihood" />
+      <.live_component module={FosterWeb.Components.Dashboard.Justification} id="justification" />
+      <.live_component module={FosterWeb.Components.Dashboard.Challenges} id="challenges" />
 
+      <%!-- demographics --%>
       <.live_component module={FosterWeb.Components.Dashboard.AgeSpans} id="age_spans" />
-      <.live_component module={FosterWeb.Components.Dashboard.MotivesAgainst} id="motives_against" />
-      <.live_component module={FosterWeb.Components.Dashboard.MotivesFor} id="motives_for" />
-      <.live_component module={FosterWeb.Components.Dashboard.HeardAbout} id="heard_about" />
       <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
       <.live_component module={FosterWeb.Components.Dashboard.Regions} id="regions" />
     </div>

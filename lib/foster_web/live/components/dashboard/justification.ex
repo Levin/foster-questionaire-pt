@@ -6,14 +6,24 @@ defmodule FosterWeb.Components.Dashboard.Justification do
   def mount(socket) do
     justification =
       Foster.Answers.all_answers()
-      |> Enum.map(fn answer -> answer.body["justification"] end)
-      |> List.flatten
+      |> Enum.group_by(& &1.body["justification"])
+      |> Enum.map(fn
+        {groupname, answers} ->
+        for name <- groupname do
+          [name, length(answers)]
+        end
+      end)
+      |> List.flatten()
+      |> Enum.chunk_every(2)
 
     dataset = Dataset.new(justification)
 
     IO.inspect(justification)
 
-    plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
+    plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400,
+    title: "Justificação da resposta de probabilidade",
+      x_label: "opções",
+      y_label: "Contagem")
 
     {:ok,
       socket

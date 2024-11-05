@@ -1,31 +1,24 @@
-defmodule FosterWeb.Components.Dashboard.HeardWhere do
+defmodule FosterWeb.Components.Dashboard.Likelihood do
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    heard_where =
+    likelihood =
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["heard_where"])
-      |> Enum.map(fn
-        {groupname, answers} ->
-        for name <- groupname do
-          [name, length(answers)]
-        end
-      end)
-      |> List.flatten()
-      |> Enum.chunk_every(2)
+      |> Enum.group_by(fn answer -> answer.body["becoming_foster"] end)
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
 
 
     dataset =
-      Dataset.new(heard_where)
+      Dataset.new(likelihood)
 
-    IO.inspect(heard_where, label: "heard_where")
+    IO.inspect(likelihood, label: "likelihood")
     IO.inspect(dataset, label: "dataset")
 
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400,
-      title: "Fonte de informação",
-      x_label: "Fontes",
+      title: "Probabilidade de acolhimento",
+      x_label: "Probabilidade",
       y_label: "Contagem")
 
     {:ok,

@@ -19,8 +19,8 @@ defmodule FosterWeb.Components.Question0 do
   def handle_event("submit", params, socket) do
     answer =
       case params["question_0"] do
-        "1" -> "yes"
-        "0" -> "no"
+        "1" -> "Sim"
+        "0" -> "Não"
       end
 
     updated_answers = Map.put(%{}, :knowledge, answer)
