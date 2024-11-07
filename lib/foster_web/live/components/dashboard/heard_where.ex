@@ -1,4 +1,5 @@
 defmodule FosterWeb.Components.Dashboard.HeardAbout do
+  alias Foster.Answers.Answer
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
@@ -6,16 +7,12 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
   def mount(socket) do
     heard_about =
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["heard_where"])
-      |> Enum.map(fn
-        {groupname, answers} ->
-        for name <- groupname do
-          [name, length(answers)]
-        end
+      |> Enum.map(fn %Answer{body: body} ->
+        Map.get(body, "heard_about_fostering", "no_anwser")
       end)
-      |> List.flatten()
-      |> Enum.chunk_every(2)
-
+      |> Enum.group_by(& &1)
+      |> Enum.to_list()
+      |> Enum.map(fn {topic, answers} -> [topic, length(answers)] end)
 
     dataset =
       Dataset.new(heard_about)
@@ -23,9 +20,8 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
     plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
     {:ok,
-      socket
-      |> assign(:plot, plot)
-    }
+     socket
+     |> assign(:plot, plot)}
   end
 
   def render(assigns) do
@@ -35,5 +31,4 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
     </div>
     """
   end
-
 end
