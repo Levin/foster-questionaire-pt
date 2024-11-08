@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-defmodule FosterWeb.Components.Dashboard.HearWhere do
-=======
-defmodule FosterWeb.Components.Dashboard.HeardAbout do
+defmodule FosterWeb.Components.Dashboard.HeardWhere do
   alias Foster.Answers.Answer
->>>>>>> origin/main
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
@@ -12,7 +8,7 @@ defmodule FosterWeb.Components.Dashboard.HeardAbout do
     heard_where =
       Foster.Answers.all_answers()
       |> Enum.map(fn %Answer{body: body} ->
-        Map.get(body, "heard_about_fostering", "no_anwser")
+        Map.get(body, "heard_about_fostering", "no_answer")
       end)
       |> Enum.group_by(& &1)
       |> Enum.to_list()
