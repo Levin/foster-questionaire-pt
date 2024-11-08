@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Dashboard.HeardWhere do
+defmodule FosterWeb.Components.Dashboard.HearWhere do
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
@@ -6,16 +6,12 @@ defmodule FosterWeb.Components.Dashboard.HeardWhere do
   def mount(socket) do
     heard_where =
       Foster.Answers.all_answers()
-      |> Enum.group_by(& &1.body["heard_where"])
-      |> Enum.map(fn
-        {groupname, answers} ->
-        for name <- groupname do
-          [name, length(answers)]
-        end
+      |> Enum.map(fn %Answer{body: body} ->
+        Map.get(body, "heard_about_fostering", "no_anwser")
       end)
-      |> List.flatten()
-      |> Enum.chunk_every(2)
-
+      |> Enum.group_by(& &1)
+      |> Enum.to_list()
+      |> Enum.map(fn {topic, answers} -> [topic, length(answers)] end)
 
     dataset =
       Dataset.new(heard_where)
@@ -29,9 +25,8 @@ defmodule FosterWeb.Components.Dashboard.HeardWhere do
       y_label: "Contagem")
 
     {:ok,
-      socket
-      |> assign(:plot, plot)
-    }
+     socket
+     |> assign(:plot, plot)}
   end
 
   def render(assigns) do
@@ -41,5 +36,4 @@ defmodule FosterWeb.Components.Dashboard.HeardWhere do
     </div>
     """
   end
-
 end

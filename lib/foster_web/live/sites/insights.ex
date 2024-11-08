@@ -1,7 +1,7 @@
 defmodule FosterWeb.Sites.Insights do
   use FosterWeb, :live_view
 
-  def mount(params, session, socket) do
+  def mount(params, _session, socket) do
     {:ok, socket}
   end
 
@@ -36,10 +36,6 @@ defmodule FosterWeb.Sites.Insights do
       <.live_component module={FosterWeb.Components.Dashboard.Regions} id="regions" />
     </div>
     """
-
   end
-  #
-  #
-#<.live_component module={FosterWeb.Components.Dashboard.HeardAbout} id="heard_about" />
-    #      <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
+
 end
