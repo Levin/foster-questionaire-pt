@@ -1,6 +1,7 @@
 defmodule FosterWeb.Sites.Insights do
   use FosterWeb, :live_view
 
+
   def mount(params, _session, socket) do
     {:ok, socket}
   end

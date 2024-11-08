@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 defmodule FosterWeb.Components.Dashboard.HearWhere do
+=======
+defmodule FosterWeb.Components.Dashboard.HeardAbout do
+  alias Foster.Answers.Answer
+>>>>>>> origin/main
   use FosterWeb, :live_component
 
   alias Contex.{Plot, Dataset, BarChart}
