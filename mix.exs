@@ -60,7 +60,8 @@ defmodule Foster.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:contex, "~> 0.5.0"}
+      {:contex, "~> 0.5.0"},
+      {:tucan, "~> 0.4.0"}
     ]
   end
 

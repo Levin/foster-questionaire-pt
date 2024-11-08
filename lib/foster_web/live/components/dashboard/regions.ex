@@ -1,41 +1,28 @@
 defmodule FosterWeb.Components.Dashboard.Regions do
   use FosterWeb, :live_component
 
-  alias Contex.{Plot, Dataset, BarChart}
-
   def mount(socket) do
     regions =
       Foster.Answers.all_answers()
       |> Enum.group_by(& &1.body["pt_region"])
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
+      |> Enum.map(fn {groupname, answers} -> %{contagem: length(answers), opções: groupname} end)
 
-    dataset =
-      Dataset.new(regions)
+    IO.inspect(regions, label: "regions")
 
-    #  TODO: I want y labels in integers
-    plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400,
-      data_labels: true,
-      title: "Regiões de todos os participantes",
-      custom_y_labels: &integer_labels/1,
-      custom_y_tick_labels: &integer_labels/1
-    )
+    plot = Tucan.bar(regions, "opções", "contagem",
+      tooltip: true,
+      orient: :horizontal,
+      corner_radius: 3)
+      |> Tucan.set_title("Regiões de todos os participantes", anchor: :middle, offset: 15)
+      |> VegaLite.to_spec()
 
-    {:ok,
-      socket
-      |> assign(:plot, plot)
-    }
-  end
 
-  defp integer_labels(value) do
-    Integer.to_string(value)
+    {:ok, push_event(socket, "draw_regions", %{"spec" => plot})}
   end
 
   def render(assigns) do
     ~H"""
-    <div>
-      <%= Contex.Plot.to_svg(@plot) %>
-    </div>
+    <div id="regions-chart" phx-hook="Dashboard"/>
     """
   end
-
 end

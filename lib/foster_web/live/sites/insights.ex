@@ -24,6 +24,7 @@ defmodule FosterWeb.Sites.Insights do
 
       <div class="h-10"></div>
        <%!--fostering questions  --%>
+       <div class="flex flex-col justify-center items-center gap-8">
       <.live_component module={FosterWeb.Components.Dashboard.PriorKnolwedge} id="prior_knowledge" />
       <.live_component module={FosterWeb.Components.Dashboard.HeardWhere} id="heard_where" />
       <.live_component module={FosterWeb.Components.Dashboard.Likelihood} id="likelihood" />
@@ -34,6 +35,7 @@ defmodule FosterWeb.Sites.Insights do
       <.live_component module={FosterWeb.Components.Dashboard.AgeSpans} id="age_spans" />
       <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
       <.live_component module={FosterWeb.Components.Dashboard.Regions} id="regions" />
+      </div>
     </div>
     """
   end

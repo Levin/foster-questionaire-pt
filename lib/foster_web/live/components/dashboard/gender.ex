@@ -7,31 +7,19 @@ defmodule FosterWeb.Components.Dashboard.Gender do
     genders =
       Foster.Answers.all_answers()
       |> Enum.group_by(fn answer -> answer.body["gender"] end)
-      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)] end)
+      |> Enum.map(fn {groupname, answers} -> %{contagem: length(answers), opções: groupname} end)
 
-    dataset = Dataset.new(genders, ["a", "b", "c", "d"])
+    plot = Tucan.pie(genders, "contagem", "opções", tooltip: true)
+      |> Tucan.set_title("Distribuição de género", anchor: :middle, offset: 15)
+      |> VegaLite.to_spec()
 
-    opts = [
-      mapping: %{category_col: "a", value_col: "b"},
-      colour_palette: ["fbb4ae", "b3cde3", "ccebc5", "dd2312"],
-      legend_setting: :legend_right,
-      data_labels: true,
-      title: "Distribuição de género"
-    ]
-
-    plot =
-      Contex.Plot.new(dataset, Contex.PieChart, 600, 400, opts)
-
-    {:ok,
-     socket
-     |> assign(:plot, plot)}
+    {:ok, push_event(socket, "draw_gender", %{"spec" => plot})}
   end
+
 
   def render(assigns) do
     ~H"""
-    <div>
-      <%= Contex.Plot.to_svg(@plot) %>
-    </div>
+    <div id="gender-chart" phx-hook="Dashboard"/>
     """
   end
 end
