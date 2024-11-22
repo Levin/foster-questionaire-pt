@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question2 do
+defmodule FosterWeb.Components.Question2Old do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -29,7 +29,7 @@ defmodule FosterWeb.Components.Question2 do
 
   def handle_event("submit", params, socket) do
 
-    updated_answers = 
+    updated_answers =
       socket.assigns.answers
       |> Map.put(:agespan, params["age"])
       |> Map.put(:gender, params["sex"])
