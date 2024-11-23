@@ -9,6 +9,7 @@ defmodule FosterWeb.Components.Question0 do
       |> assign(:is_true, false)
       |> assign(:no_knowledge, false)
       |> assign(:knowledge, false)
+      # |> assign(:heard_where, "")
     }
   end
 
@@ -19,12 +20,22 @@ defmodule FosterWeb.Components.Question0 do
   def handle_event("submit", params, socket) do
     answer =
       case params["question_0"] do
-        "1" -> "yes"
-        "0" -> "no"
+        "1" -> "Sim"
+        "0" -> "Não"
       end
 
     updated_answers = Map.put(%{}, :knowledge, answer)
+
+    updated_answers =
+      if params["question_0"] == "0" do
+        Map.put(updated_answers, :heard_where, ["Não ouvi"])
+      else
+        updated_answers
+      end
+
+
     IO.inspect(updated_answers, label: "Answers after Q0")
+    IO.inspect(params["question_0"], label: "params")
     {:noreply,
      socket
      |> assign(:path, params["question_0"])

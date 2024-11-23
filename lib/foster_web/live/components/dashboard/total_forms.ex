@@ -4,28 +4,20 @@ defmodule FosterWeb.Components.Dashboard.TotalForms do
   alias Contex.{Plot, Dataset, BarChart}
 
   def mount(socket) do
-    total_calls = 
+    total_calls =
       Foster.Answers.all_answers()
       |> Enum.count()
 
     IO.inspect(total_calls)
 
-    dataset = Dataset.new(total_calls)
-
-    plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
-
-    {:ok, 
-      socket
-      |> assign(:plot, plot)
-    }
+    {:ok,
+     socket
+     |> assign(:total, total_calls)}
   end
 
   def render(assigns) do
     ~H"""
-    <div>
-      <%= Contex.Plot.to_svg(@plot) %>
-    </div>
+    <div></div>
     """
   end
-
 end

@@ -1,34 +1,35 @@
-defmodule FosterWeb.Components.Dashboard.HeardAbout do
+defmodule FosterWeb.Components.Dashboard.HeardWhere do
   alias Foster.Answers.Answer
   use FosterWeb, :live_component
 
-  alias Contex.{Plot, Dataset, BarChart}
-
   def mount(socket) do
-    heard_about =
+      heard_where =
       Foster.Answers.all_answers()
-      |> Enum.map(fn %Answer{body: body} ->
-        Map.get(body, "heard_about_fostering", "no_anwser")
+      |> Enum.flat_map(fn %Answer{body: body} ->
+        case Map.get(body, "heard_where", []) do
+          list when is_list(list) -> list
+          value -> [value]
+        end
       end)
       |> Enum.group_by(& &1)
-      |> Enum.to_list()
-      |> Enum.map(fn {topic, answers} -> [topic, length(answers)] end)
+      |> Enum.map(fn {topic, answers} ->
+        %{"contagem" => length(answers), "opções" => topic}
+      end)
 
-    dataset =
-      Dataset.new(heard_about)
+    plot = Tucan.bar(heard_where, "opções", "contagem",
+      tooltip: true,
+      orient: :horizontal,
+      corner_radius: 3)
+      |> Tucan.set_title("Fonte de informação", anchor: :middle, offset: 15)
+      |> VegaLite.to_spec()
 
-    plot = Contex.Plot.new(dataset, Contex.BarChart, 600, 400)
 
-    {:ok,
-     socket
-     |> assign(:plot, plot)}
+    {:ok, push_event(socket, "draw_heard_where", %{"spec" => plot})}
   end
 
   def render(assigns) do
     ~H"""
-    <div>
-      <%= Contex.Plot.to_svg(@plot) %>
-    </div>
+    <div id="heard-where-chart" phx-hook="Dashboard"/>
     """
   end
 end

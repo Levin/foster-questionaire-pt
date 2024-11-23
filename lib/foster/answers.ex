@@ -9,7 +9,6 @@ defmodule Foster.Answers do
     |> Repo.insert()
   end
 
-
   def remove_answers() do
     Repo.delete_all(Answer)
   end
@@ -17,5 +16,4 @@ defmodule Foster.Answers do
   def all_answers() do
     Repo.all(Answer)
   end
-
 end

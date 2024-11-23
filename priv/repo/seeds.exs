@@ -296,8 +296,6 @@ answers = [
   }
 ]
 
-
-
 Enum.each(answers, fn answer ->
   Answers.create_answer(answer)
 end)
