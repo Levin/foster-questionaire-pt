@@ -18,16 +18,23 @@ defmodule FosterWeb.InteractiveForm do
       |> assign(:answers, %{})
       |> assign(:pages, pages)
       |> assign(:current_page, 1)
-      |> IO.inspect(label: "Mount")
     }
   end
 
 
   @impl true
   def handle_event("next_page", _params, socket) do
+    # logic to skip q1 if q0 is answered with 0 ie no_knolwedge
+    step = if socket.assigns.pages[socket.assigns.current_page] == :q0 and
+              socket.assigns.answers[:q0] == "0" do
+      2
+    else
+      1
+    end
+
     {:noreply,
       socket
-      |> assign(:current_page, min(map_size(socket.assigns.pages), socket.assigns.current_page + 1))
+      |> assign(:current_page, min(map_size(socket.assigns.pages), socket.assigns.current_page + step))
       # |> IO.inspect(label: "Handle event next page")
     }
   end
