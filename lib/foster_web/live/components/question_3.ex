@@ -1,8 +1,9 @@
-defmodule FosterWeb.Components.Question3 do
+defmodule FosterWeb.Components.Question3Old do
   use FosterWeb, :live_component
   require Logger
 
   def mount(socket) do
+    IO.inspect(socket, label: "socket Q3")
     {:ok,
       socket
       |> assign(:slide_3, true)
@@ -12,6 +13,7 @@ defmodule FosterWeb.Components.Question3 do
       |> assign(:three, false)
       |> assign(:four, false)
       |> assign(:five, false)
+      |> IO.inspect(socket, label: "socket Q3")
     }
   end
 
@@ -27,7 +29,7 @@ defmodule FosterWeb.Components.Question3 do
     IO.inspect(params)
     IO.inspect(socket)
 
-    updated_answers = 
+    updated_answers =
       Map.put(
         socket.assigns.answers,
         :becoming_foster,

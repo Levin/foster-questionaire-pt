@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question0 do
+defmodule FosterWeb.Components.Question0Old do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -13,12 +13,11 @@ defmodule FosterWeb.Components.Question0 do
   end
 
   def update(params, socket) do
-    IO.inspect(params)
     {:ok, socket}
   end
 
   def handle_event("submit", params, socket) do
-    answer = 
+    answer =
       case params["question_0"] do
         "1" -> "yes"
         "0" -> "no"
@@ -44,7 +43,7 @@ defmodule FosterWeb.Components.Question0 do
           </div>
         <p class="text-2xl">
         <span class="font-bold font-nohemi ">
-        Sabe que em Portugal há mais de 6000 crianças e jovens a viver em instituições? 
+        Sabe que em Portugal há mais de 6000 crianças e jovens a viver em instituições?
 
         </span>
         Descubra a importância do Acolhimento Familiar para Crianças e Jovens e como poderá ter impacto.

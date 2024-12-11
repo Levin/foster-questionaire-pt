@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Question1b do
+defmodule FosterWeb.Components.Question1bOld do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -23,7 +23,6 @@ defmodule FosterWeb.Components.Question1b do
   end
 
   def handle_event("validate", params, socket) do
-    IO.inspect(params)
     {:noreply,
       socket
       |> assign(:people, params["people"])
@@ -36,7 +35,7 @@ defmodule FosterWeb.Components.Question1b do
 
   def handle_event("submit", params, socket) do
 
-    filtered_answers = 
+    filtered_answers =
       params
       |> Enum.filter(fn {_, value} -> value == "true" end)
       |> Enum.map(fn {key, _} -> key end)
@@ -46,7 +45,8 @@ defmodule FosterWeb.Components.Question1b do
       :heard_about_fostering,
       filtered_answers
     )
-
+    IO.puts("updated_answers in submit")
+    IO.inspect(updated_answers)
     {:noreply,
       socket
       |> assign(:type, "")

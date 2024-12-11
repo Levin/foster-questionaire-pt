@@ -1,4 +1,4 @@
-defmodule FosterWeb.Components.Endpage do
+defmodule FosterWeb.Components.EndpageOld do
   use FosterWeb, :live_component
 
   def mount(socket) do
@@ -13,7 +13,7 @@ defmodule FosterWeb.Components.Endpage do
   def update(params, socket) do
     Foster.Answers.create_answer(%{body: params.answers})
 
-    {:ok, 
+    {:ok,
       socket
       |> assign(:answers, params.answers)
     }
