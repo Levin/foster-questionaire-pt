@@ -1,7 +1,7 @@
 defmodule FosterWeb.InteractiveForm do
   use FosterWeb, :live_view
 
-  alias FosterWeb.Sites.BasePage
+  alias FosterWeb.Sites.BaseQuestion
 
   @impl true
   def mount(_params, _session, socket) do
@@ -73,7 +73,7 @@ defmodule FosterWeb.InteractiveForm do
           <img src="/images/somekids.svg" />
         </div>
         <div>
-            <.live_component module={BasePage} id={@current_page} current_page={page} />
+            <.live_component module={BaseQuestion} id={@current_page} current_page={page} />
         </div>
 
         <%= if page != :endpage do %>

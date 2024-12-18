@@ -1,4 +1,4 @@
-defmodule FosterWeb.Sites.BasePage do
+defmodule FosterWeb.Sites.BaseQuestion do
   use FosterWeb, :live_component
 
   @page_components %{
