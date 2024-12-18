@@ -22,7 +22,7 @@ defmodule FosterWeb.Components.Question4 do
 
     updated_answers = Map.put(
       socket.assigns.answers,
-      :heard_about_fostering,
+      :motive_for_fostering,
       filtered_answers
     )
 
