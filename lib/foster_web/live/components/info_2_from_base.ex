@@ -6,7 +6,7 @@ defmodule FosterWeb.Components.Info2 do
     ~H"""
     <div>
       <span class="font-bold font-nohemi ">
-        Mitos e verdades sobre a Família de Acolhimento:
+        As Verdades sobre o Acolhimento Familiar
       </span>
 
       <div>
@@ -18,17 +18,17 @@ defmodule FosterWeb.Components.Info2 do
           </li>
           <li style="margin-top: 20px">
             <span class="font-nohemi ">
-              Tem de ter mais de 25 anos e ser residente em Portugal.
+              A única exigência é ter mais de 25 anos e residir em Portugal.
             </span>
           </li>
           <li style="margin-top: 20px">
             <span class="font-nohemi ">
-            Tem possibilidade continuar a acompanhar a trajetória futura da criança que acolheu.
+            Família de Acolhimento tem a possibilidade de continuar a acompanhar a trajetória futura da criança que acolheu.
             </span>
           </li>
           <li style="margin-top: 20px">
             <span class="font-nohemi ">
-              Conseguir um vínculo forte com a criança é muito melhor do que falta de vínculo na instituição.
+              Conseguir um vínculo forte no curto prazo com a criança é muito melhor do que falta de vínculo na instituição.
             </span>
           </li>
         </ul>

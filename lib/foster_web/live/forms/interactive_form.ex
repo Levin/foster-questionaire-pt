@@ -16,7 +16,6 @@ defmodule FosterWeb.InteractiveForm do
               8 => :q4,
               9 => :i3,
               10 => :q5,
-              11 => :endpage,
             }
     {:ok,
       socket
@@ -40,6 +39,7 @@ defmodule FosterWeb.InteractiveForm do
 
     {:noreply,
       socket
+      |> assign(:step, step)
       |> assign(:current_page, min(map_size(socket.assigns.pages), socket.assigns.current_page + step))
       # |> IO.inspect(label: "Handle event next page")
     }
@@ -50,7 +50,7 @@ defmodule FosterWeb.InteractiveForm do
   def handle_event("previous_page", _params, socket) do
     {:noreply,
       socket
-      |> assign(:current_page, max(1, socket.assigns.current_page - 1))
+      |> assign(:current_page, max(1, socket.assigns.current_page - socket.assigns.step))
       # |> IO.inspect(label: "Page #{socket.assigns.current_page}")
     }
   end
@@ -83,33 +83,53 @@ defmodule FosterWeb.InteractiveForm do
     end
   end
 
+  @impl true
+  def handle_event("submit_answers", _params, socket) do
+    case Foster.Answers.create_answer(%{body: socket.assigns.answers}) do
+      {:ok, _answer} ->
+        {:noreply, socket |> put_flash(:info, "Respostas enviadas com sucesso!") |> push_redirect(to: "/support")}
+      {:error, _changeset} ->
+        {:noreply, socket |> put_flash(:error, "Erro ao enviar respostas") |> push_redirect(to: "/support")}
+    end
+  end
 
   @impl true
   def render(assigns) do
-    page = assigns.pages[assigns.current_page]
-    image_source = get_image_source(page)
+    assigns =
+      assigns
+      |> assign(:page, assigns.pages[assigns.current_page])
+      |> assign(:image_source, get_image_source(assigns.pages[assigns.current_page]))
     ~H"""
     <div>
       <div class="mx-10">
         <div class="mb-4">
-          <img src={image_source} />
+          <img src={@image_source} />
         </div>
         <div>
-          <%= if is_info_page(page) do %>
-            <.live_component module={BaseInfopage} id={@current_page} current_page={page} />
+          <%= if is_info_page(@page) do %>
+            <.live_component module={BaseInfopage} id={@current_page} current_page={@page} />
           <% else %>
-            <.live_component module={BaseQuestion} id={@current_page} current_page={page} />
+            <.live_component module={BaseQuestion} id={@current_page} current_page={@page} />
             <% end %>
         </div>
 
-        <%= if page != :endpage do %>
+        <%= if @page != :endpage do %>
           <div class="h-56 grid grid-cols-3 gap-4 content-center">
-            <form phx-submit="previous_page">
-              <.button type="submit">Previous Page</.button>
-            </form>
-            <form phx-submit="next_page">
-              <.button type="submit">Next Page</.button>
-            </form>
+            <%= if @page != :q0 do %>
+              <form phx-submit="previous_page">
+                <.button type="submit">Anterior</.button>
+              </form>
+            <% end %>
+            <%= if @page != :q5 do %>
+              <form phx-submit="next_page">
+                <.button type="submit">Seguinte</.button>
+              </form>
+            <% end %>
+            <%= if @page == :q5 do %>
+              <form phx-submit="submit_answers">
+                <.button type="submit">Enviar Respostas</.button>
+              </form>
+            <% end %>
           </div>
         <% end %>
       </div>

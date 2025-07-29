@@ -45,28 +45,28 @@ defmodule FosterWeb.Components.Question4 do
         phx-target={@myself}
         >
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Cannot have kids" checked={@no_kids == "true"} />
+          <.input type="checkbox" name="Não poder ter filhos" checked={@no_kids == "true"} />
           <div>
             <p class="font-nohemt">Não poder ter filhos</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Altruism" checked={@altruism == "true"} />
+          <.input type="checkbox" name="Altruismo" checked={@altruism == "true"} />
           <div>
             <p class="font-nohemt">Assegurar ambiente familiar a uma criança vulnerável</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Financial Benefits" checked={@fin_benefits == "true"} />
+          <.input type="checkbox" name="Benefícios Financeiros" checked={@fin_benefits == "true"} />
           <div>
             <p class="font-nohemt">Apoio e benefícios financeiros</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="No Interest" checked={@no_interest == "true"} />
+          <.input type="checkbox" name="Não tenho interesse" checked={@no_interest == "true"} />
           <div>
             <p class="font-nohemt">Não tenho interesse</p>
           </div>
@@ -74,7 +74,7 @@ defmodule FosterWeb.Components.Question4 do
 
         <div class="flex items-center gap-2">
           <.label>Outro</.label>
-          <.input name="other" value="" placeholder="other"/>
+          <.input name="outro" value="" placeholder="outro"/>
         </div>
 
       </.simple_form>

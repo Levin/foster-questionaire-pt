@@ -22,11 +22,23 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
-import { DrawPTnumbers, DrawEUnumbers } from "./hooks";
+import { DrawPTnumbers, DrawEUnumbers,
+  DrawSpans, DrawGender,
+  DrawHeardAbout, DrawRegion,
+  DrawProbFor, DrawMotivesFor,
+  DrawMotivesAgainst,
+} from "./hooks";
 
 let Hooks = {
   DrawPTnumbers: DrawPTnumbers,
-  DrawEUnumbers: DrawEUnumbers
+  DrawEUnumbers: DrawEUnumbers,
+  DrawSpans: DrawSpans,
+  DrawGender: DrawGender,
+  DrawHeardAbout: DrawHeardAbout,
+  DrawRegion: DrawRegion,
+  DrawProbFor: DrawProbFor,
+  DrawMotivesFor: DrawMotivesFor,
+  DrawMotivesAgainst: DrawMotivesAgainst
 };
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")

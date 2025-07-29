@@ -48,7 +48,7 @@ defmodule FosterWeb.Components.Question1 do
         <div class="flex items-center gap-2">
           <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
           <div>
-            <p class="font-nohemt">Redes sociais (Facebook, Instagram, outros)</p>
+            <p class="font-nohemt">Redes sociais</p>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ defmodule FosterWeb.Components.Question1 do
 
         <div class="flex items-center gap-2">
           <.input type="checkbox" name="internet" checked={@internet == "true"} />
-          <p class="font-nohemt">Internet</p>
+          <p class="font-nohemt">Internet em geral</p>
         </div>
 
         <div class="flex items-center gap-2">
