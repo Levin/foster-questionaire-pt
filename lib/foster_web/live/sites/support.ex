@@ -22,12 +22,14 @@ defmodule FosterWeb.Sites.Support do
 
       <p class="text-2xl">
         <ol class="list-decimal list-inside">
-          <li>Lei do Mecenato: Apoie com benefícios fiscais e impacto social.</li>
-          <li>Voluntariado: Doe o seu tempo e talento à nossa causa.</li>
-          <li>Consignação do IRS (1%) ou 0,15% do IVA suportado. NIF: <strong>501650296</strong> (Sem qualquer custo adicional para si)</li>
-          <li>Transferência Bancária: NIB BPI: <strong>PT50 0010 0000 61075010001 98</strong></li>
+            <li><strong>Lei do Mecenato:</strong> Apoie com benefícios fiscais e impacto social.</li>
+            <li><strong>Voluntariado:</strong> Doe o seu tempo e talento à nossa causa.</li>
+            <li><strong>Consignação do IRS (1%) ou 0,15% do IVA suportado.</strong> NIF: <strong>501650296</strong> (Sem qualquer custo adicional para si)</li>
+            <li><strong>Donativo:</strong> NIB BPI: <strong>PT50 0010 0000 61075010001 98</strong></li>
         </ol>
       </p>
+
+
 
       <div class="mt-4">
         <span class="font-bold font-nohemi ">
@@ -57,6 +59,10 @@ defmodule FosterWeb.Sites.Support do
             Email
           </a>
         </div>
+      </div>
+      <%!-- Feedback part --%>
+      <div class="mt-4">
+        <.live_component module={FosterWeb.Components.FeedbackSubscribe} id="subscribe" />
       </div>
     </div>
     """
