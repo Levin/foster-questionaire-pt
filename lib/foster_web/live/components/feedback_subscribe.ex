@@ -12,7 +12,7 @@ defmodule FosterWeb.Components.FeedbackSubscribe do
 
   @impl true
   def handle_event("subscribe", %{"email" => email}, socket) do
-    case Foster.Answers.create_subscribe(%{email: email}) do
+    case Foster.Subscriptions.create_subscribe(%{email: email}) do
       {:ok, _subscribe} ->
         {:noreply, socket |> put_flash(:info, "Inscrição realizada com sucesso!") |> push_redirect(to: "/support")}
       {:error, _changeset} ->
@@ -22,7 +22,7 @@ defmodule FosterWeb.Components.FeedbackSubscribe do
 
   @impl true
   def handle_event("send_feedback", %{"feedback" => feedback}, socket) do
-    case Foster.Answers.create_feedback(%{body: %{"feedback" => feedback}}) do
+    case Foster.Feedback.create_feedback(%{body: %{"feedback" => feedback}}) do
       {:ok, _feedback} ->
         {:noreply, socket |> put_flash(:info, "Feedback enviado com sucesso!") |> push_redirect(to: "/support")}
       {:error, _changeset} ->
