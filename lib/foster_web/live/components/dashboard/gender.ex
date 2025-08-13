@@ -1,25 +1,35 @@
-defmodule FosterWeb.Components.Dashboard.Gender do
+defmodule FosterWeb.Components.Dashboard.GenderTucan do
   use FosterWeb, :live_component
 
-  alias Contex.Dataset
-
-  def mount(socket) do
+  @impl true
+  def update(assigns, socket) do
     genders =
       Foster.Answers.all_answers()
-      |> Enum.group_by(fn answer -> answer.body["gender"] end)
-      |> Enum.map(fn {groupname, answers} -> %{contagem: length(answers), opções: groupname} end)
+      |> Enum.group_by(fn answer -> get_in(answer.body, ["q2", "gender"]) end)
+      |> Enum.reject(fn {groupname, _answers} -> is_nil(groupname) end)  # Filter out nil age spans
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
 
-    plot = Tucan.pie(genders, "contagem", "opções", tooltip: true)
-      |> Tucan.set_title("Distribuição de género", anchor: :middle, offset: 15)
-      |> VegaLite.to_spec()
+    IO.inspect(genders)
+
+    data = genders |> Enum.map(fn [gender, count] -> %{"genero" => gender, "contagem" => count} end)
+
+    plot = Tucan.bar(data, "genero", "contagem",
+    tooltip: true,
+    orient: :horizontal,
+    width: 300,
+    height: 150)
+    |> Tucan.set_title("Distribuição por género")
+    |> VegaLite.to_spec()
 
     {:ok, push_event(socket, "draw_gender", %{"spec" => plot})}
   end
 
-
+  @impl true
   def render(assigns) do
     ~H"""
-    <div id="gender-chart" phx-hook="Dashboard"/>
+    <div>
+      <div id="gender" phx-hook="DrawGender" style="margin-top: 20px"></div>
+    </div>
     """
   end
 end

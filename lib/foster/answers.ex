@@ -1,8 +1,8 @@
 defmodule Foster.Answers do
   alias Foster.Repo
   alias Foster.Answers.Answer
-  alias Foster.Answers
 
+  # answer functions
   def create_answer(params) do
     %Answer{}
     |> Answer.changeset(params)

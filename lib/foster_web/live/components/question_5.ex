@@ -6,29 +6,20 @@ defmodule FosterWeb.Components.Question5 do
     # IO.inspect(answers, label: "Answers after final submit", struct: false, limit: :infinity)
     {:ok,
       socket
-      |> assign(:slide_5, true)
-      |> assign(:slide_6, false)
       |> assign(:money, false)
       |> assign(:housing, false)
       |> assign(:work, false)
-      |> assign(:fear1, false)
-      |> assign(:fear2, false)
+      |> assign(:family_context, false)
+      |> assign(:lack_experience, false)
       |> assign(:other, "")
+      |> assign(:answers, %{})
     }
   end
 
-  def update(params, socket) do
-    {:ok,
-      socket
-      |> assign(:answers, params.answers)
-    }
-  end
-
-  def handle_event("submit", params, socket) do
-
-    # NOTE: do edit the params[....]
-    filtered_answers =
-      params
+  @impl true
+  def handle_event("update_answers", params, socket) do
+    # Extract the relevant answers from params
+    filtered_answers = params
       |> Enum.filter(fn {_, value} -> value == "true" end)
       |> Enum.map(fn {key, _} -> key end)
 
@@ -52,33 +43,24 @@ defmodule FosterWeb.Components.Question5 do
     # update database here
     Foster.Answers.create_answer(%{body: updated_answers})
 
-    IO.inspect(updated_answers, label: "Answers after Q5")
-    {:noreply,
-      socket
-      # |> assign(:path, params["question_5"])
-      # |> assign(:answers, updated_answers)
-      # |> assign(:slide_5, false)
-      |> push_navigate(to: "/donativos")
-    }
+    send(self(), {:update_answers, updated_answers})
+
+    {:noreply, socket}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div>
-    <%= if @slide_5 do %>
-    <div class="mx-10">
-      <div class="mb-4">
-        <img src="/images/somekids.svg" />
-      </div>
       <p class="text-2xl text-light_dark_matter font-inter">
-      Qoais são os principais desafios para que seja uma Família de Acolhimento?
+        Qoais são os principais desafios para que seja uma Família de Acolhimento?
       </p>
 
       <.simple_form
-      for={}
-      phx-submit="submit"
-      phx-target={@myself}
-      >
+        for={}
+        phx-change="update_answers"
+        phx-target={@myself}
+        >
       <div class="flex items-center gap-2">
         <.input type="checkbox" name="Financial" checked={@money == "true"} />
         <div>
@@ -101,14 +83,14 @@ defmodule FosterWeb.Components.Question5 do
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Family Reasons" checked={@fear1 == "true"} />
+        <.input type="checkbox" name="Family Reasons" checked={@family_context == "true"} />
         <div>
           <p class="font-nohemt">Contexto familiar actual desafiante</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Unexperienced Parents" checked={@fear2 == "true"} />
+        <.input type="checkbox" name="Unexperienced Parents" checked={@lack_experience == "true"} />
         <div>
           <p class="font-nohemt">Inexperiência parental</p>
         </div>
@@ -119,11 +101,7 @@ defmodule FosterWeb.Components.Question5 do
         <.input name="other" value="" placeholder="other"/>
       </div>
 
-      <.button>Submeter</.button>
       </.simple_form>
-
-    </div>
-      <% end %>
     </div>
     """
   end

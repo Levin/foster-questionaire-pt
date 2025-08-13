@@ -24,6 +24,7 @@ defmodule FosterWeb.Router do
     live "/estatisticas", Sites.Insights
     live "/donativos", Sites.Donations
     live "/dashboard", Sites.Dashboard
+    live "/support", Sites.Support
   end
 
   # Other scopes may use custom stacks.

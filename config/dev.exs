@@ -22,7 +22,15 @@ config :foster, Foster.Repo,
 config :foster, FosterWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [
+    ip: {127, 0, 0, 1},
+    port: 4000,
+    # Configure Bandit options to handle connection errors more gracefully
+    thousand_island_options: [
+      read_timeout: 30_000,
+      shutdown_timeout: 30_000
+    ]
+  ],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -70,6 +78,12 @@ config :foster, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
+
+# Filter out harmless Bandit transport errors during development
+config :logger,
+  compile_time_purge_matching: [
+    [level_lower_than: :error, module: Bandit.TransportError]
+  ]
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.

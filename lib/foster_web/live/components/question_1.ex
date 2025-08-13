@@ -1,13 +1,14 @@
-defmodule FosterWeb.Components.Question4 do
+defmodule FosterWeb.Components.Question1 do
   use FosterWeb, :live_component
 
   def mount(socket) do
     {:ok,
       socket
-      |> assign(:no_kids, false)
-      |> assign(:altruism, false)
-      |> assign(:fin_benefits, false)
-      |> assign(:no_interest, false)
+      |> assign(:people, false)
+      |> assign(:media, false)
+      |> assign(:internet, false)
+      |> assign(:social_media, false)
+      |> assign(:organizations, false)
       |> assign(:other, "")
       |> assign(:answers, %{})
     }
@@ -22,7 +23,7 @@ defmodule FosterWeb.Components.Question4 do
 
     updated_answers = Map.put(
       socket.assigns.answers,
-      :motive_for_fostering,
+      :heard_about_fostering,
       filtered_answers
     )
 
@@ -36,7 +37,7 @@ defmodule FosterWeb.Components.Question4 do
     ~H"""
     <div>
       <p class="text-2xl text-light_dark_matter font-inter">
-        Quais são os principais motivos da sua resposta anterior?
+        Onde ouviu falar de Acolhimento Familiar?
       </p>
 
       <.simple_form
@@ -45,41 +46,42 @@ defmodule FosterWeb.Components.Question4 do
         phx-target={@myself}
         >
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Não poder ter filhos" checked={@no_kids == "true"} />
+          <.input type="checkbox" name="social_media" checked={@social_media == "true"} />
           <div>
-            <p class="font-nohemt">Não poder ter filhos</p>
+            <p class="font-nohemt">Redes sociais</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Altruismo" checked={@altruism == "true"} />
+          <.input type="checkbox" name="media" checked={@media == "true"} />
           <div>
-            <p class="font-nohemt">Assegurar ambiente familiar a uma criança vulnerável</p>
+            <p class="font-nohemt">TV, Rádio ou Jornal</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Benefícios Financeiros" checked={@fin_benefits == "true"} />
+          <.input type="checkbox" name="people" checked={@people == "true"} />
           <div>
-            <p class="font-nohemt">Apoio e benefícios financeiros</p>
+            <p class="font-nohemt">Familiares, amigos, colegas</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <.input type="checkbox" name="Não tenho interesse" checked={@no_interest == "true"} />
-          <div>
-            <p class="font-nohemt">Não tenho interesse</p>
-          </div>
+          <.input type="checkbox" name="organizations" checked={@organizations == "true"} />
+          <p class="font-nohemt">Instituições governamentais ou sem fins lucrativos</p>
         </div>
 
         <div class="flex items-center gap-2">
-          <.label>Outro</.label>
-          <.input name="outro" value="" placeholder="outro"/>
+          <.input type="checkbox" name="internet" checked={@internet == "true"} />
+          <p class="font-nohemt">Internet em geral</p>
         </div>
 
+        <div class="flex items-center gap-2">
+          <.label>Outros (especificar)</.label>
+          <.input name="other" value="" placeholder="other"/>
+        </div>
       </.simple_form>
     </div>
     """
   end
-
 end

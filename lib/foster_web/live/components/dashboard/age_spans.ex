@@ -1,30 +1,37 @@
-defmodule FosterWeb.Components.Dashboard.AgeSpans do
-  alias Foster.Answers.Answer
+defmodule FosterWeb.Components.Dashboard.AgeSpansTucan do
   use FosterWeb, :live_component
 
-  def mount(socket) do
+  @impl true
+  def update(assigns, socket) do
     spans =
       Foster.Answers.all_answers()
-      |> Enum.group_by(fn answer -> answer.body["agespan"] end)
-      |> Enum.map(fn {groupname, answers} -> %{contagem: length(answers), opções: groupname} end)
+      |> Enum.group_by(fn answer -> get_in(answer.body, ["q2", "agespan"]) end)
+      |> Enum.reject(fn {groupname, _answers} -> is_nil(groupname) end)  # Filter out nil age spans
+      |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
 
+    # Convert to data format suitable for Tucan
+    data = spans |> Enum.map(fn [age, count] -> %{"idade" => age, "contagem" => count} end)
 
-    IO.inspect(spans, label: "spans")
+    plot = Tucan.bar(data, "idade", "contagem",
+    tooltip: true,
+    orient: :horizontal,
+    width: 300,
+    height: 150)
+    |> Tucan.set_title("Faixa etária de todos os participantes")
+    |> VegaLite.to_spec()
 
-    plot = Tucan.bar(spans, "opções", "contagem",
-      tooltip: true,
-      orient: :horizontal,
-      corner_radius: 3)
-      |> Tucan.set_title("Faixa etária de todos os participantes", anchor: :middle, offset: 15)
-      |> VegaLite.to_spec()
-
-
-    {:ok, push_event(socket, "draw_ages", %{"spec" => plot})}
+    {:ok, push_event(socket, "draw_spans", %{"spec" => plot})}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
-    <div id="ages-chart" phx-hook="Dashboard"/>
+    <div>
+      <%!-- <span class="font-nohemi ">
+        Portugal está em último lugar na Europa. Vamos fazer melhor?
+      </span> --%>
+      <div id="spans" phx-hook="DrawSpans" style="margin-top: 20px"></div>
+    </div>
     """
   end
 end

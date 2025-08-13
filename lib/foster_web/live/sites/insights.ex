@@ -11,9 +11,8 @@ defmodule FosterWeb.Sites.Insights do
       <img src="/images/kids.svg" class=" mx-auto" />
       <div class="mx-10 mt-4">
         <div class="text-2xl font-nohemi font-bold">
-          <p>O que sabem os</p>
-          <p>Portuguses sobre</p>
-          famílias de acolhimento?
+          <p>Resumo das respostas</p>
+          <p>recolhidas</p>
         </div>
 
         <div class="h-10"></div>
@@ -22,22 +21,18 @@ defmodule FosterWeb.Sites.Insights do
         </div>
       </div>
 
-      <div class="h-10"></div>
-       <%!--fostering questions  --%>
-       <div class="flex flex-col justify-center items-center gap-8">
-      <.live_component module={FosterWeb.Components.Dashboard.PriorKnolwedge} id="prior_knowledge" />
-      <.live_component module={FosterWeb.Components.Dashboard.HeardWhere} id="heard_where" />
-      <.live_component module={FosterWeb.Components.Dashboard.Likelihood} id="likelihood" />
-      <.live_component module={FosterWeb.Components.Dashboard.Justification} id="justification" />
-      <.live_component module={FosterWeb.Components.Dashboard.Challenges} id="challenges" />
-
-      <%!-- demographics --%>
-      <.live_component module={FosterWeb.Components.Dashboard.AgeSpans} id="age_spans" />
-      <.live_component module={FosterWeb.Components.Dashboard.Gender} id="genders" />
-      <.live_component module={FosterWeb.Components.Dashboard.Regions} id="regions" />
+      <div class="h-10">
       </div>
+
+      <.live_component module={FosterWeb.Components.Dashboard.AgeSpansTucan} id="age_spans" />
+      <.live_component module={FosterWeb.Components.Dashboard.GenderTucan} id="gender" />
+      <.live_component module={FosterWeb.Components.Dashboard.RegionsTucan} id="regions" />
+      <.live_component module={FosterWeb.Components.Dashboard.HeardTucan} id="heard_about" />
+      <.live_component module={FosterWeb.Components.Dashboard.ProbForTucan} id="probability" />
+      <.live_component module={FosterWeb.Components.Dashboard.MotivesForTucan} id="motives_for" />
+      <.live_component module={FosterWeb.Components.Dashboard.MotivesAgainstTucan} id="motives_against" />
     </div>
     """
-  end
 
+  end
 end
