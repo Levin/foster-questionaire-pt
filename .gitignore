@@ -38,4 +38,4 @@ npm-debug.log
 
 
 /config/dev.exs
-node_modules/
+/node_modules/

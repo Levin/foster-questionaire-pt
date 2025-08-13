@@ -16,7 +16,7 @@ defmodule FosterWeb.Components.Question2 do
     updated_answers =
       socket.assigns.answers
       |> Map.put(:agespan, params["age"])
-      |> Map.put(:gender, params["sex"])
+      |> Map.put(:gender, params["gender"])
       |> Map.put(:pt_region, params["region"])
 
     send(self(), {:update_answers, updated_answers})

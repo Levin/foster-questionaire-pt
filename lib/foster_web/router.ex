@@ -22,6 +22,7 @@ defmodule FosterWeb.Router do
 
     live "/", InteractiveForm
     live "/estatisticas", Sites.Insights
+    live "/donativos", Sites.Donations
     live "/dashboard", Sites.Dashboard
     live "/support", Sites.Support
   end

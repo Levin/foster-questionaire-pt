@@ -2,6 +2,8 @@ defmodule FosterWeb.Components.Question5 do
   use FosterWeb, :live_component
 
   def mount(socket) do
+    # answers = socket.assigns[:answers]
+    # IO.inspect(answers, label: "Answers after final submit", struct: false, limit: :infinity)
     {:ok,
       socket
       |> assign(:money, false)
@@ -21,11 +23,25 @@ defmodule FosterWeb.Components.Question5 do
       |> Enum.filter(fn {_, value} -> value == "true" end)
       |> Enum.map(fn {key, _} -> key end)
 
-    updated_answers = Map.put(
-      socket.assigns.answers,
-      :motive_against_fostering,
-      filtered_answers
-    )
+    other_answer = params["other"]
+
+    updated_answers =
+      if other_answer != "" do
+        Map.put(
+          socket.assigns.answers,
+          :challenges,
+          filtered_answers ++ [[other: other_answer]]
+        )
+      else
+        Map.put(
+          socket.assigns.answers,
+          :challenges,
+          filtered_answers
+        )
+      end
+
+    # update database here
+    Foster.Answers.create_answer(%{body: updated_answers})
 
     send(self(), {:update_answers, updated_answers})
 
@@ -89,5 +105,4 @@ defmodule FosterWeb.Components.Question5 do
     </div>
     """
   end
-
 end
