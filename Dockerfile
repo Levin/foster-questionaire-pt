@@ -22,9 +22,14 @@ FROM ${BUILDER_IMAGE} as builder
 
 
 # install build dependencies and Node.js/npm
+# RUN apt-get update -y && \
+#   apt-get install -y build-essential git nodejs npm && \
+#   apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# Install build tools and Node.js
 RUN apt-get update -y && \
-  apt-get install -y build-essential git nodejs npm && \
-  apt-get clean && rm -f /var/lib/apt/lists/*_*
+    apt-get install -y build-essential git nodejs npm curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # prepare build dir
 WORKDIR /app
@@ -44,20 +49,27 @@ RUN mkdir config
 # copy compile-time config files before we compile dependencies
 # to ensure any relevant config change will trigger the dependencies
 # to be re-compiled.
-COPY config/config.exs config/${MIX_ENV}.exs config/
+# COPY config/config.exs config/${MIX_ENV}.exs config/
+
+# copy all configs
+COPY config config
 RUN mix deps.compile
 
 COPY priv priv
-
 COPY lib lib
-
 COPY assets assets
+WORKDIR /app/assets
+RUN npm install
+
+# Set NODE_PATH so esbuild can find node_modules
+ENV NODE_PATH=/app/assets/node_modules
 
 # compile assets
-RUN cd assets && npm install
+# RUN cd assets && npm install
 RUN mix assets.deploy
 
 # Compile the release
+WORKDIR /app
 RUN mix compile
 
 # Changes to config/runtime.exs don't require recompiling the code
