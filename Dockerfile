@@ -66,11 +66,11 @@ ENV NODE_PATH=/app/assets/node_modules
 
 # compile assets
 # RUN cd assets && npm install
-WORKDIR /app/assets
+WORKDIR /app
 RUN mix assets.deploy
 
 # Compile the release
-WORKDIR /app
+# WORKDIR /app
 RUN mix compile
 
 # Changes to config/runtime.exs don't require recompiling the code
