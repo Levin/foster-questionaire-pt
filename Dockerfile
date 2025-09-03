@@ -111,4 +111,5 @@ USER nobody
 # ENTRYPOINT ["/tini", "--"]
 
 # CMD ["/app/bin/server"]
-CMD ["/app/bin/acolher-pt"]
+# CMD ["/app/bin/acolher-pt"]
+CMD ["/app/bin/foster", "start"]
