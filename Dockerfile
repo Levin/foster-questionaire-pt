@@ -20,9 +20,11 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
 FROM ${BUILDER_IMAGE} as builder
 
-# install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# install build dependencies and Node.js/npm
+RUN apt-get update -y && \
+  apt-get install -y build-essential git nodejs npm && \
+  apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
 WORKDIR /app
@@ -52,6 +54,7 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
+RUN cd assets && npm install
 RUN mix assets.deploy
 
 # Compile the release
