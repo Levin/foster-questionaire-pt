@@ -62,43 +62,43 @@ defmodule FosterWeb.Components.Question5 do
         phx-target={@myself}
         >
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Financial" checked={@money == "true"} />
+        <.input type="checkbox" name="Financeira" checked={@money == "true"} />
         <div>
           <p class="font-nohemt">Encargo financeiro adicional</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Housing Conditions" checked={@housing == "true"} />
+        <.input type="checkbox" name="Habitação" checked={@housing == "true"} />
         <div>
           <p class="font-nohemt"> Condições habitacionais actuais</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Workload" checked={@work == "true"} />
+        <.input type="checkbox" name="Carga de trabalho" checked={@work == "true"} />
         <div>
           <p class="font-nohemt">Limitações por motivos profissionais</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Family Reasons" checked={@family_context == "true"} />
+        <.input type="checkbox" name="Familiares" checked={@family_context == "true"} />
         <div>
           <p class="font-nohemt">Contexto familiar actual desafiante</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.input type="checkbox" name="Unexperienced Parents" checked={@lack_experience == "true"} />
+        <.input type="checkbox" name="Inexperiência" checked={@lack_experience == "true"} />
         <div>
           <p class="font-nohemt">Inexperiência parental</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <.label>Other</.label>
-        <.input name="other" value="" placeholder="other"/>
+        <.label>Outro</.label>
+        <.input name="Outro" value="" placeholder="outro"/>
       </div>
 
       </.simple_form>

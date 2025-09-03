@@ -5,7 +5,8 @@ defmodule FosterWeb.Components.Dashboard.ProbForTucan do
   def update(assigns, socket) do
     answers =
       Foster.Answers.all_answers()
-      |> Enum.group_by(fn answer -> get_in(answer.body["q3"]) end)
+      # |> Enum.group_by(fn answer -> get_in(answer.body["q3"]) end)
+      |> Enum.group_by(fn answer -> get_in(answer.body, ["q3"]) end)
       |> Enum.reject(fn {groupname, _answers} -> is_nil(groupname) end)  # Filter out nil age spans
       |> Enum.map(fn {groupname, answers} -> [groupname, length(answers)]  end)
 
