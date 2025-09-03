@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'hack-foster'
+app = 'acolher-pt'
 primary_region = 'ams'
 kill_signal = 'SIGTERM'
 
@@ -13,7 +13,7 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'hack-foster.fly.dev'
+  PHX_HOST = 'acolher-pt.fly.dev'
   PORT = '8080'
 
 [http_service]
