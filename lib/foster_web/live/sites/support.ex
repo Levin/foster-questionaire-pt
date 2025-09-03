@@ -29,8 +29,6 @@ defmodule FosterWeb.Sites.Support do
         </ol>
       </p>
 
-
-
       <div class="mt-4">
         <span class="font-bold font-nohemi ">
           Por favor, compartilhe com a sua rede

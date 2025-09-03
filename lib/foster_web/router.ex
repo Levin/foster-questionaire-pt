@@ -18,13 +18,14 @@ defmodule FosterWeb.Router do
   end
 
   scope "/", FosterWeb do
-    pipe_through :browser
+  pipe_through :browser
 
-    live "/", InteractiveForm
-    live "/estatisticas", Sites.Insights
-    live "/donativos", Sites.Donations
-    live "/dashboard", Sites.Dashboard
-    live "/support", Sites.Support
+  live "/", InteractiveForm
+  live "/estatisticas", Sites.Insights
+  live "/donativos", Sites.Donations
+  live "/dashboard", Sites.Dashboard
+  live "/support", Sites.Support
+  live "/privacy", Sites.PrivacyPolicy
   end
 
   # Other scopes may use custom stacks.

@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "vega-embed": "^6.28.0"
+    "vega": "^6.1.2",
+    "vega-embed": "^7.0.2",
+    "vega-lite": "^6.2.0"
   }
 }

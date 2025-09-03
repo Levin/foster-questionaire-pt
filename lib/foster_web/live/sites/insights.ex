@@ -21,9 +21,6 @@ defmodule FosterWeb.Sites.Insights do
         </div>
       </div>
 
-      <div class="h-10">
-      </div>
-
       <.live_component module={FosterWeb.Components.Dashboard.AgeSpansTucan} id="age_spans" />
       <.live_component module={FosterWeb.Components.Dashboard.GenderTucan} id="gender" />
       <.live_component module={FosterWeb.Components.Dashboard.RegionsTucan} id="regions" />
