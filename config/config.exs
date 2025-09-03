@@ -38,7 +38,8 @@ config :esbuild,
     args:
       ~w(js/app.js vendor/fonts/NoHeMi/nohemi.css --bundle --loader:.woff2=file --loader:.woff=file --target=es2016 --outdir=../priv/static/assets),
     cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+    env: %{"NODE_PATH" => Path.expand("../assets/node_modules", __DIR__)}
+    # env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 # Configure tailwind (the version is required)
