@@ -3,14 +3,14 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'foster'
+app = 'acolher-pt'
 primary_region = 'ams'
 kill_signal = 'SIGTERM'
 
 [build]
 
 [deploy]
-  release_command = '/app/bin/foster'
+  release_command = '/app/bin/acolher-pt'
 
 [env]
   PHX_HOST = 'acolher-pt.fly.dev'
