@@ -10,7 +10,7 @@ kill_signal = 'SIGTERM'
 [build]
 
 [deploy]
-  release_command = '/app/bin/migrate'
+  release_command = '/app/bin/acolher-pt'
 
 [env]
   PHX_HOST = 'acolher-pt.fly.dev'
