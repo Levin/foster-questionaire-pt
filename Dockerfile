@@ -49,23 +49,24 @@ RUN mkdir config
 # copy compile-time config files before we compile dependencies
 # to ensure any relevant config change will trigger the dependencies
 # to be re-compiled.
-# COPY config/config.exs config/${MIX_ENV}.exs config/
+COPY config/config.exs config/${MIX_ENV}.exs config/
+RUN mix deps.compile
 
 # copy all configs
-COPY config config
-RUN mix deps.compile
+# COPY config config
+# RUN mix deps.compile
 
 COPY priv priv
 COPY lib lib
 COPY assets assets
-WORKDIR /app/assets
+# WORKDIR /app/assets
 RUN npm install
 
 # Set NODE_PATH so esbuild can find node_modules
 ENV NODE_PATH=/app/assets/node_modules
 
 # compile assets
-# RUN cd assets && npm install
+RUN cd assets && npm install
 WORKDIR /app
 RUN mix assets.deploy
 
@@ -102,7 +103,8 @@ ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
 # COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/foster ./app
-COPY --from=builder --chown=nobody:root /app/_build/prod/rel/foster /app
+# COPY --from=builder --chown=nobody:root /app/_build/prod/rel/foster /app
+COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/foster ./
 
 
 USER nobody
@@ -112,6 +114,6 @@ USER nobody
 # above and adding an entrypoint. See https://github.com/krallin/tini for details
 # ENTRYPOINT ["/tini", "--"]
 
-# CMD ["/app/bin/server"]
+CMD ["/app/bin/server"]
 # CMD ["/app/bin/acolher-pt"]
-CMD ["/app/bin/foster", "start"]
+# CMD ["/app/bin/foster", "start"]
