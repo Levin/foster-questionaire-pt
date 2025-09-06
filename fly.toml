@@ -15,6 +15,7 @@ kill_signal = 'SIGTERM'
 #  release_command = '/app/bin/migrate'
 
 [env]
+  PHX_SERVER = "true"
   PHX_HOST = 'acolher-pt.fly.dev'
   PORT = '8080'
 
