@@ -1,22 +1,19 @@
-# fly.toml app configuration file generated for acolher-pt on 2025-09-06T19:43:11+01:00
+# fly.toml app configuration file generated for foster-red-wildflower-5968 on 2025-09-07T18:30:41+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'acolher-pt'
-primary_region = 'fra'
+app = 'foster-red-wildflower-5968'
+primary_region = 'ams'
 kill_signal = 'SIGTERM'
 
 [build]
 
 [deploy]
-#  release_command = '/app/bin/foster'
-#  release_command = "/app/bin/foster eval Foster.Release.migrate"
-#  release_command = '/app/bin/migrate'
+  release_command = '/app/bin/migrate'
 
 [env]
-  PHX_SERVER = "true"
-  PHX_HOST = 'acolher-pt.fly.dev'
+  PHX_HOST = 'foster-red-wildflower-5968.fly.dev'
   PORT = '8080'
 
 [http_service]
