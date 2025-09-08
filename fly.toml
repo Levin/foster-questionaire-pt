@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for foster-red-wildflower-5968 on 2025-09-07T18:30:41+01:00
+# fly.toml app configuration file generated for foster-pt on 2025-09-08T12:10:07+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'foster-red-wildflower-5968'
+app = 'foster-pt'
 primary_region = 'ams'
 kill_signal = 'SIGTERM'
 
@@ -13,7 +13,7 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'foster-red-wildflower-5968.fly.dev'
+  PHX_HOST = 'foster-pt.fly.dev'
   PORT = '8080'
 
 [http_service]
