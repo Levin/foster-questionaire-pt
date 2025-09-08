@@ -1,6 +1,7 @@
 defmodule FosterWeb.Components.Question4 do
   use FosterWeb, :live_component
 
+  @impl true
   def mount(socket) do
     {:ok,
       socket
@@ -17,13 +18,21 @@ defmodule FosterWeb.Components.Question4 do
   def handle_event("update_answers", params, socket) do
     # Extract the relevant answers from params
     filtered_answers = params
-      |> Enum.filter(fn {_, value} -> value == "true" end)
+      |> Enum.filter(fn {key, value} -> value == "true" and key != "other" end)
       |> Enum.map(fn {key, _} -> key end)
+
+    other = Map.get(params, "other", "")
+    answers_with_other =
+      if other != "" do
+        filtered_answers ++ [other]
+      else
+        filtered_answers
+      end
 
     updated_answers = Map.put(
       socket.assigns.answers,
       :motive_for_fostering,
-      filtered_answers
+      answers_with_other
     )
 
     send(self(), {:update_answers, updated_answers})
@@ -74,7 +83,7 @@ defmodule FosterWeb.Components.Question4 do
 
         <div class="flex items-center gap-2">
           <.label>Outro</.label>
-          <.input name="outro" value="" placeholder="outro"/>
+          <.input name="other" value="" placeholder="outro"/>
         </div>
 
       </.simple_form>

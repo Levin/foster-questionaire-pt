@@ -6,7 +6,7 @@ defmodule FosterWeb.Components.Dashboard.MotivesAgainstTucan do
     answers =
       Foster.Answers.all_answers()
       |> Enum.flat_map(fn answer ->
-        case get_in(answer.body, ["q5", "motive_against_fostering"]) do
+        case get_in(answer.body, ["q5", "challenges"]) do
           nil -> []
           motives when is_list(motives) -> motives
           motive -> [motive]
@@ -19,10 +19,20 @@ defmodule FosterWeb.Components.Dashboard.MotivesAgainstTucan do
     data = answers |> Enum.map(fn [antimotivo, count] -> %{"ANTI-motivo" => antimotivo, "contagem" => count} end)
 
     plot = Tucan.bar(data, "ANTI-motivo", "contagem",
-    tooltip: true,
-    orient: :horizontal,
-    width: 300,
-    height: 150)
+      tooltip: true,
+      orient: :horizontal,
+      width: 300,
+      height: 150,
+      x: [
+        tickMinStep: 1,            # force step size = 1
+        # axis: %{format: ".0f"},   # ensure whole numbers on tick labels
+        # scale: %{nice: true},     # clean up scale
+      ],
+      y: [
+        sort: "-x" ,  # sort categories by contagem descending
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Distribuição por ANTI-motivo")
     |> VegaLite.to_spec()
 
@@ -33,7 +43,7 @@ defmodule FosterWeb.Components.Dashboard.MotivesAgainstTucan do
   def render(assigns) do
     ~H"""
     <div>
-      <div id="motives_against" phx-hook="DrawMotivesAgainst" style="margin-top: 20px"></div>
+      <div id="motives_against" phx-hook="DrawMotivesAgainst" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end

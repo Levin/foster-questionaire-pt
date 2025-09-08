@@ -10,6 +10,7 @@ defmodule FosterWeb.Components.Question3 do
     {:noreply, socket}
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div>

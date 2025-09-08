@@ -1,6 +1,7 @@
 defmodule FosterWeb.Components.Question2 do
   use FosterWeb, :live_component
 
+  @impl true
   def mount(socket) do
     {:ok,
      socket
@@ -37,26 +38,26 @@ defmodule FosterWeb.Components.Question2 do
         phx-change="update_answers"
         phx-target={@myself}>
         <div class="flex items-center gap-2">
-          <.label>Your Age</.label>
-          <.input name="age" value="" placeholder="Age" type="select"
-                  options={["--", "18-25", "26-35", "36-49", "50-65"]} />
+          <.label>Idade</.label>
+          <.input name="age" value="" placeholder="Idade" type="select"
+                  options={["--", "18-25", "26-35", "36-49", "50-65", ">65"]} />
         </div>
 
         <div class="flex items-center gap-2">
-          <.label>Your Gender</.label>
-          <.input name="sex" value="" placeholder="Sex" type="select"
-                  options={["--", "Non-Binary", "I prefeer not to say","feminino", "maskulino"]} />
+          <.label>Gênero</.label>
+          <.input name="gender" value="" placeholder="Gênero" type="select"
+                  options={["--", "Não-binário", "Prefiro não dizer","Feminino", "Masculino"]} />
         </div>
 
         <div class="flex items-center gap-2">
-          <.label>Region in Portugal</.label>
+          <.label>Região</.label>
           <.input name="region"
                   value=""
-                  placeholder="Region"
+                  placeholder="Região"
                   type="select"
-                  options={["--", "aveiro", "beja", "braga", "bragança", "castelo_branco", "coimbra", "evora", "faro",
-                            "guarda", "leiria", "lisboa", "porto", "santarem", "setubal", "viana_do_castelo",
-                            "vila_real", "viseu", "madeira", "acores"]} />
+                  options={["--", "Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro",
+                            "Guarda", "Leiria", "Lisboa", "Porto", "Santarém", "Setúbal", "Viana do Castelo",
+                            "Vila Real", "Viseu", "Madeira", "Açores"]} />
         </div>
       </.simple_form>
     </div>

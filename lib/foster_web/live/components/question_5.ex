@@ -1,6 +1,7 @@
 defmodule FosterWeb.Components.Question5 do
   use FosterWeb, :live_component
 
+  @impl true
   def mount(socket) do
     # answers = socket.assigns[:answers]
     # IO.inspect(answers, label: "Answers after final submit", struct: false, limit: :infinity)
@@ -20,25 +21,24 @@ defmodule FosterWeb.Components.Question5 do
   def handle_event("update_answers", params, socket) do
     # Extract the relevant answers from params
     filtered_answers = params
-      |> Enum.filter(fn {_, value} -> value == "true" end)
+      |> Enum.filter(fn {key, value} -> value == "true" and key != "other" end)
       |> Enum.map(fn {key, _} -> key end)
 
-    other_answer = params["other"]
-
-    updated_answers =
-      if other_answer != "" do
-        Map.put(
-          socket.assigns.answers,
-          :challenges,
-          filtered_answers ++ [[other: other_answer]]
-        )
+    # Handle the 'other' option if present and non-empty
+    other = Map.get(params, "other", "")
+    answers_with_other =
+      if other != "" do
+        filtered_answers ++ [other]
       else
-        Map.put(
-          socket.assigns.answers,
-          :challenges,
-          filtered_answers
-        )
+        filtered_answers
       end
+
+
+    updated_answers = Map.put(
+      socket.assigns.answers,
+      :challenges,
+      answers_with_other
+    )
 
     # update database here
     Foster.Answers.create_answer(%{body: updated_answers})
@@ -98,7 +98,7 @@ defmodule FosterWeb.Components.Question5 do
 
       <div class="flex items-center gap-2">
         <.label>Outro</.label>
-        <.input name="Outro" value="" placeholder="outro"/>
+        <.input name="other" value="" placeholder="outro"/>
       </div>
 
       </.simple_form>

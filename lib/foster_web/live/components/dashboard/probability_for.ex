@@ -18,7 +18,11 @@ defmodule FosterWeb.Components.Dashboard.ProbForTucan do
     tooltip: true,
     orient: :horizontal,
     width: 300,
-    height: 150)
+    height: 150,
+    y: [
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Inclinação para acolhimento (5 = muito provável)")
     |> VegaLite.to_spec()
 
@@ -29,7 +33,7 @@ defmodule FosterWeb.Components.Dashboard.ProbForTucan do
   def render(assigns) do
     ~H"""
     <div>
-      <div id="probability" phx-hook="DrawProbFor" style="margin-top: 20px"></div>
+      <div id="probability" phx-hook="DrawProbFor" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end

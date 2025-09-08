@@ -17,7 +17,12 @@ defmodule FosterWeb.Components.Dashboard.GenderTucan do
     tooltip: true,
     orient: :horizontal,
     width: 300,
-    height: 150)
+    height: 150,
+    y: [
+        sort: "-x",   # sort categories by contagem descending
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Distribuição por género")
     |> VegaLite.to_spec()
 
@@ -28,7 +33,7 @@ defmodule FosterWeb.Components.Dashboard.GenderTucan do
   def render(assigns) do
     ~H"""
     <div>
-      <div id="gender" phx-hook="DrawGender" style="margin-top: 20px"></div>
+      <div id="gender" phx-hook="DrawGender" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end

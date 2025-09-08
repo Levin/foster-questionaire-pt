@@ -17,7 +17,12 @@ defmodule FosterWeb.Components.Dashboard.RegionsTucan do
     tooltip: true,
     orient: :horizontal,
     width: 300,
-    height: 150)
+    height: 150,
+    y: [
+        sort: "-x",   # sort categories by contagem descending
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Distribuição por região")
     |> VegaLite.to_spec()
 
@@ -28,7 +33,7 @@ defmodule FosterWeb.Components.Dashboard.RegionsTucan do
   def render(assigns) do
     ~H"""
     <div>
-      <div id="region" phx-hook="DrawRegion" style="margin-top: 20px"></div>
+      <div id="region" phx-hook="DrawRegion" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end

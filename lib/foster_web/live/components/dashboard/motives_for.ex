@@ -23,7 +23,12 @@ defmodule FosterWeb.Components.Dashboard.MotivesForTucan do
     tooltip: true,
     orient: :horizontal,
     width: 300,
-    height: 150)
+    height: 150,
+    y: [
+        sort: "-x",   # sort categories by contagem descending
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Distribuição por motivo")
     |> VegaLite.to_spec()
 
@@ -34,7 +39,7 @@ defmodule FosterWeb.Components.Dashboard.MotivesForTucan do
   def render(assigns) do
     ~H"""
     <div>
-      <div id="motives_for" phx-hook="DrawMotivesFor" style="margin-top: 20px"></div>
+      <div id="motives_for" phx-hook="DrawMotivesFor" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end

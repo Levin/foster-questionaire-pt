@@ -16,7 +16,11 @@ defmodule FosterWeb.Components.Dashboard.AgeSpansTucan do
     tooltip: true,
     orient: :horizontal,
     width: 300,
-    height: 150)
+    height: 150,
+    y: [
+        title: ""
+      ]
+    )
     |> Tucan.set_title("Faixa etária de todos os participantes")
     |> VegaLite.to_spec()
 
@@ -30,7 +34,7 @@ defmodule FosterWeb.Components.Dashboard.AgeSpansTucan do
       <%!-- <span class="font-nohemi ">
         Portugal está em último lugar na Europa. Vamos fazer melhor?
       </span> --%>
-      <div id="spans" phx-hook="DrawSpans" style="margin-top: 20px"></div>
+      <div id="spans" phx-hook="DrawSpans" style="margin-top: 20px; display: flex; justify-content: center;"></div>
     </div>
     """
   end
